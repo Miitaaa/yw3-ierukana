@@ -1,0 +1,1986 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>妖怪ウォッチ3 全妖怪言えるかな？</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f7f8f8;color:#283239;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans JP","Yu Gothic",sans-serif}.site-header{height:76px;display:flex;align-items:center;justify-content:center;background:#fff;border-bottom:1px solid #d6d9d9;position:sticky;top:0;z-index:5}.brand{display:flex;align-items:baseline;gap:14px}.brand span{color:#d62f2f;font-weight:800;font-size:20px}.brand strong{font-size:31px}.help{position:absolute;right:18px;border:1px solid #cfd3d3;background:#fff;border-radius:7px;padding:9px 14px}.tabs{display:flex;justify-content:center;background:#fff;padding:7px 10px 0}.tab{border:1px solid #cfd4d4;background:#fff;padding:11px 16px;font-size:16px}.tab:first-child{border-radius:7px 0 0 7px}.tab:last-child{border-radius:0 7px 7px 0}.tab.active{background:#356257;color:#fff;border-color:#356257}.status{display:flex;gap:10px;justify-content:center;padding:10px 14px}.timer,.score{background:#fff;border:1px solid #d5dada;border-radius:7px;min-width:270px;text-align:center;padding:9px;font-size:22px}.timer{font-size:30px;font-variant-numeric:tabular-nums}.score b{font-size:31px}.controls{display:flex;gap:7px;max-width:1000px;margin:auto;padding:0 10px}.controls input{flex:1;border:2px solid #d49d36;border-radius:8px;padding:13px 14px;font-size:22px}.controls button{border:0;border-radius:7px;padding:0 18px;font-size:17px}.startBtn{background:#356257;color:#fff;font-weight:700}.answerBtn{background:#397fb8;color:#fff}.pauseBtn{background:#fff;border:1px solid #cfd3d3!important}.giveupBtn{background:#fff;border:1px solid #cfd3d3!important;color:#b53b3b}
+/* ▼ メッセージが常に見えるように sticky を追加 ▼ */
+.message{text-align:center;min-height:40px;padding:12px;color:#356257; position:sticky; top:76px; z-index:4; background:rgba(247,248,248,0.95); border-bottom:1px solid #e2e5e5; font-weight:bold;}
+.filters{display:flex;align-items:center;gap:22px;max-width:1000px;margin:auto;padding:0 12px 8px;color:#52605f}.filter-right{margin-left:auto;display:flex;gap:13px;align-items:center}.mini{border:0;background:#356257;color:#fff;border-radius:8px;padding:8px 12px}#grid{max-width:1000px;margin:auto;padding:0 10px 25px;display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.section-title{grid-column:1/-1;background:#eaf0ee;border:1px solid #d4dcda;padding:10px 12px;font-weight:700}.card{min-height:125px;border:1px solid #dce1df;border-radius:7px;background:#eef1ef;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}.card .num{position:absolute;left:8px;top:5px;color:#7b8484;font-size:12px}.portrait{width:65px;height:65px;overflow:hidden;border-radius:50%;border:6px solid #d7ddda;display:grid;place-items:center;color:#aab2af;font-size:29px;background:#f5f7f6}.name{font-size:12px;margin-top:3px;text-align:center;line-height:1.1;max-width:96%;word-break:break-word}.card.solved{background:#1f765b;color:#fff;border-color:#1f765b}.card.solved .num{color:#dcefe9}.card.solved .portrait{border-color:#e8f3ef;background:#fff}.check{position:absolute;right:7px;top:5px;font-weight:900}footer{border-top:1px solid #d8dddd;background:#fff;padding:12px 16px 20px;display:flex;gap:18px;flex-wrap:wrap;color:#52605f;font-size:13px}.legend{margin-left:auto}.legend i{display:inline-block;width:18px;height:18px;border-radius:3px;vertical-align:middle;margin:0 4px}.legend .ok{background:#1f765b}.legend .ng{background:#e5e9e7;border:1px solid #d1d7d4}footer p{width:100%;margin:0;text-align:center}dialog{border:0;border-radius:12px;padding:24px;max-width:440px;box-shadow:0 15px 50px #0003}dialog::backdrop{background:#0005}@media(max-width:700px){.site-header{height:60px}.brand{gap:7px}.brand span{font-size:13px}.brand strong{font-size:24px}.help{font-size:12px;padding:7px 9px;right:7px}.tabs{overflow-x:auto;justify-content:flex-start}.tab{font-size:12px;padding:10px;white-space:nowrap}.status{padding:7px 6px}.timer,.score{min-width:0;flex:1;font-size:15px;padding:8px}.timer{font-size:23px}.score b{font-size:23px}.controls{padding:0 6px}.controls input{font-size:18px;padding:11px}.controls button{font-size:14px;padding:0 9px}.startBtn{padding:0 11px!important}
+/* ▼ スマホ版のメッセージ追従位置を調整 ▼ */
+.message{font-size:13px; padding:8px; min-height:34px; top:227px;}
+.filters{font-size:12px;gap:10px}.filter-right{gap:6px}#grid{gap:3px;padding:0 4px 15px}.card{min-height:108px}.portrait{width:48px;height:48px;border-width:4px;font-size:22px}.card .name{font-size:9px}.card .num{font-size:9px;left:4px}.right{right:4px}}
+@media(max-width:700px){
+  body{overflow-x:hidden;-webkit-text-size-adjust:100%;}
+  .site-header{position:sticky;top:0;}
+  .brand{min-width:0;max-width:calc(100% - 58px);overflow:hidden;white-space:nowrap;}
+  .brand strong{overflow:hidden;text-overflow:ellipsis;}
+  .status{position:sticky;top:60px;z-index:4;background:#f7f8f8;}
+  .controls{position:sticky;top:111px;z-index:4;background:#f7f8f8;padding-top:5px;padding-bottom:5px;}
+  .controls input{min-width:0;}
+  #grid{grid-template-columns:repeat(7,minmax(0,1fr));}
+  .card{min-width:0;overflow:hidden;}
+  .portrait{width:44px;height:44px;flex:0 0 44px;}
+  .portrait img{width:100%;height:100%;object-fit:cover;display:block;}
+  .card .name{width:100%;padding:0 2px;}
+  footer{font-size:12px;}
+}
+.confirm-dialog,.result-dialog{width:min(92vw,430px);text-align:center}.confirm-dialog h2,.result-dialog h2{margin:4px 0 10px}.dialog-actions{display:flex;gap:8px;justify-content:center;margin-top:18px}.dialog-actions button{border:0;border-radius:8px;padding:11px 18px;font-size:15px}.secondaryBtn{background:#eef1ef;color:#283239}.dangerBtn{background:#b53b3b;color:#fff}.result-mark{font-size:12px;letter-spacing:.18em;color:#356257;font-weight:800}.result-stats{display:flex;gap:8px;margin-top:18px}.result-stats>div{flex:1;background:#f3f5f4;border-radius:9px;padding:12px}.result-stats span,.result-stats strong{display:block}.result-stats span{font-size:12px;color:#66716f}.result-stats strong{font-size:24px;margin-top:3px}.list-mode .card.unsolved{background:#fff;border-color:#eef0ef;color:#c5cbca}.list-mode .card.unsolved .portrait{background:#fff;border-color:#f0f2f1;color:#d8dcdb}.list-mode .card.unsolved .name{color:#53605d;font-weight:600}.list-mode .card.unsolved .portrait{border-color:#e3e8e5}.list-mode .card.unsolved .portrait img{width:100%;height:100%;object-fit:cover;display:block}
+.controls input{min-width:0;min-height:54px;font-size:24px;}
+footer{
+  position:fixed;left:0;right:0;bottom:0;z-index:10;
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+  box-shadow:0 -3px 14px #00000012;
+  align-items:center;
+}
+body{padding-bottom:78px;}
+footer p{display:none;}
+@media(max-width:700px){
+  .controls{display:flex;flex-wrap:wrap;gap:6px;}
+  .controls input{order:0;flex:1 1 calc(100% - 76px);width:calc(100% - 76px);min-height:58px;font-size:23px;padding:12px;}
+  .controls #submit{order:1;min-height:58px;flex:0 0 70px;padding:0 8px;}
+  .controls #start{order:2;flex:1 1 30%;min-height:42px;}
+  .controls #pause{order:3;flex:1 1 25%;min-height:42px;}
+  .controls #giveup{order:4;flex:1 1 20%;min-height:42px;}
+  footer{gap:12px;padding:9px 12px calc(9px + env(safe-area-inset-bottom));font-size:12px;}
+  .legend{margin-left:auto;}
+  body{padding-bottom:68px;}
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="brand"><span>妖怪ウォッチ3</span><strong>全妖怪言えるかな？</strong></div>
+  <button id="helpBtn" class="help">遊び方</button>
+</header>
+<nav class="tabs">
+  <button data-mode="normal" class="tab active">基本 <b id="normalCount"></b>体</button>
+  <button data-mode="boss" class="tab">ボスあり <b id="bossCount"></b>体</button>
+</nav>
+<section class="status">
+  <div class="timer" id="timer">00:00:00</div>
+  <div class="score">正解 <b id="correct">0</b>/<span id="total">698</span>体 残り <b id="remaining">698</b>体</div>
+</section>
+<section class="controls">
+  <button id="start" class="startBtn">ゲーム開始</button>
+  <input id="answer" autocomplete="off" enterkeyhint="done" placeholder="妖怪の名前を入力">
+  <button id="submit" class="answerBtn">回答</button>
+  <button id="pause" class="pauseBtn">一時停止</button>
+  <button id="giveup" class="giveupBtn">降参</button>
+</section>
+<div id="message" class="message">「ゲーム開始」ボタンを押すとゲームが始まります。</div>
+<section class="filters">
+  <span>通常妖怪</span><span>ボス妖怪</span>
+  <div class="filter-right">
+    <button id="showAll" class="mini active">すべて <span></span></button>
+    <span>正解済み <b id="solvedCount">0</b></span>
+    <span>未回答 <b id="unsolvedCount">698</b></span>
+  </div>
+</section>
+<main id="grid"></main>
+<footer>
+  <label><input type="checkbox" id="sound"> 正解時の効果音</label>
+  <label><input type="checkbox" id="autoscroll" checked> 自動スクロール</label>
+  <div class="legend"><i class="ok"></i> 正解済み <i class="ng"></i> 未回答</div>
+  <p>妖怪ウォッチ3の非公式ファンゲームです。株式会社レベルファイブとは関係ありません。</p>
+</footer>
+<dialog id="confirmGiveup" class="confirm-dialog">
+  <h2>本当に降参しますか？</h2>
+  <p>ここまでの正解数とタイムを記録して、ゲームを終了します。</p>
+  <div class="dialog-actions"><button id="cancelGiveup" class="secondaryBtn">キャンセル</button><button id="confirmGiveupOk" class="dangerBtn">降参する</button></div>
+</dialog>
+<dialog id="result" class="result-dialog">
+  <div class="result-mark">RESULT</div>
+  <h2 id="resultMessage">ゲーム終了！</h2>
+  <div class="result-stats"><div><span>正解</span><strong id="resultScore">0 / 698</strong></div><div><span>タイム</span><strong id="resultTime">00:00:00</strong></div></div>
+  <div class="dialog-actions"><button id="showResultList" class="secondaryBtn">一覧を表示</button><button id="resultRetry" class="startBtn">やり直す</button></div>
+</dialog>
+<dialog id="help">
+  <h2>遊び方</h2>
+  <p>「ゲーム開始」を押してから、制限時間を計測します。</p>
+  <p>思い出せる妖怪の名前を入力してください。</p>
+  <p>ひらがな・カタカナ、全角半角などの違いはできるだけ吸収します。</p>
+  <p>「基本」は698体、「ボスあり」は752体です。モード別・ページ離脱時のセーブ機能ややり直す機能に対応しています。</p>
+  <button id="closeHelp">閉じる</button>
+</dialog>
+<script>
+const YO_KAI = [
+  { "id": 1, "name": "アチャー", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/001.jpg" },
+  { "id": 2, "name": "枕返し", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/002.jpg" },
+  { "id": 3, "name": "ぶようじん坊", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/003.jpg" },
+  { "id": 4, "name": "がらあきん坊", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/004.jpg" },
+  { "id": 5, "name": "さきがけの助", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/005.jpg" },
+  { "id": 6, "name": "ダラケ刀", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/006.jpg" },
+  { "id": 7, "name": "ザンバラ刀", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/007.jpg" },
+  { "id": 8, "name": "ダララだんびら", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/008.jpg" },
+  { "id": 9, "name": "かたづ家来", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/009.jpg" },
+  { "id": 10, "name": "アライ魔将", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/010.jpg" },
+  { "id": 11, "name": "獅子まる", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/011.jpg" },
+  { "id": 12, "name": "万尾獅子", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/012.jpg" },
+  { "id": 13, "name": "おこ武者", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/013.jpg" },
+  { "id": 14, "name": "くしゃ武者", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/014.jpg" },
+  { "id": 15, "name": "なまはげ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/015.jpg" },
+  { "id": 16, "name": "なまなまはげ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/016.jpg" },
+  { "id": 17, "name": "ちからモチ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/017.jpg" },
+  { "id": 18, "name": "やきモチ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/018.jpg" },
+  { "id": 19, "name": "一瞬ボーイ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/019.jpg" },
+  { "id": 20, "name": "寝ブタ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/020.jpg" },
+  { "id": 21, "name": "ねぶた", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/021.jpg" },
+  { "id": 22, "name": "ひつま武士", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/022.jpg" },
+  { "id": 23, "name": "ひまつ武士", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/023.jpg" },
+  { "id": 24, "name": "ダメジャー", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/024.jpg" },
+  { "id": 25, "name": "ダメジャナイン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/025.jpg" },
+  { "id": 26, "name": "カブトさん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/026.jpg" },
+  { "id": 27, "name": "ゲンマ将軍", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/027.jpg" },
+  { "id": 28, "name": "黄泉ゲンスイ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/028.jpg" },
+  { "id": 29, "name": "おにぎり侍", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/029.jpg" },
+  { "id": 30, "name": "焼きおに斬り", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/030.jpg" },
+  { "id": 31, "name": "あかなめ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/031.jpg" },
+  { "id": 32, "name": "総ナメ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/032.jpg" },
+  { "id": 33, "name": "ガチン小僧", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/033.jpg" },
+  { "id": 34, "name": "天下無僧", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/034.jpg" },
+  { "id": 35, "name": "泥田坊", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/035.jpg" },
+  { "id": 36, "name": "ニクヤ鬼", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/036.jpg" },
+  { "id": 37, "name": "シラ切りスズメ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/037.jpg" },
+  { "id": 38, "name": "ベンケイ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/038.jpg" },
+  { "id": 39, "name": "からくりベンケイ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/039.jpg" },
+  { "id": 40, "name": "メラメライオン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/040.jpg" },
+  { "id": 41, "name": "グラグライオン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/041.jpg" },
+  { "id": 42, "name": "とどろき獅子", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/042.jpg" },
+  { "id": 43, "name": "しょうブシ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/043.jpg" },
+  { "id": 44, "name": "まさむね", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/044.jpg" },
+  { "id": 45, "name": "むらまさ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/045.jpg" },
+  { "id": 46, "name": "くさなぎ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/046.jpg" },
+  { "id": 47, "name": "フユニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/047.jpg" },
+  { "id": 48, "name": "妖怪ガッツK", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/048.jpg" },
+  { "id": 49, "name": "妖怪ガッツF", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/049.jpg" },
+  { "id": 50, "name": "いばる～ん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/050.jpg" },
+  { "id": 51, "name": "やまと", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/051.jpg" },
+  { "id": 52, "name": "カブキ猿", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/052.jpg" },
+  { "id": 53, "name": "クワノ武士", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/053.jpg" },
+  { "id": 54, "name": "クワガ大将", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/054.jpg" },
+  { "id": 55, "name": "オオクワノ神", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/055.jpg" },
+  { "id": 56, "name": "マスクドニャーン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/056.jpg" },
+  { "id": 57, "name": "モモタロニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/057.jpg" },
+  { "id": 58, "name": "ニャン騎士", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/058.jpg" },
+  { "id": 59, "name": "ブリー隊長", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/059.jpg" },
+  { "id": 60, "name": "ブリー元帥", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/060.jpg" },
+  { "id": 61, "name": "鬼食い", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/061.jpg" },
+  { "id": 62, "name": "いのちとり", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/062.jpg" },
+  { "id": 63, "name": "ヒカリオロチ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/063.jpg" },
+  { "id": 64, "name": "鬼蜘蛛", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/064.jpg" },
+  { "id": 65, "name": "ハンゾウ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/065.jpg" },
+  { "id": 66, "name": "コタロウ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/066.jpg" },
+  { "id": 67, "name": "椿姫", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/067.jpg" },
+  { "id": 68, "name": "さかさっ傘", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/068.jpg" },
+  { "id": 69, "name": "化け草履", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/069.jpg" },
+  { "id": 70, "name": "パッカー", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/070.jpg" },
+  { "id": 71, "name": "口すべらし", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/071.jpg" },
+  { "id": 72, "name": "ズルズルづる", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/072.jpg" },
+  { "id": 73, "name": "かぜカモ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/073.jpg" },
+  { "id": 74, "name": "つづかな僧", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/074.jpg" },
+  { "id": 75, "name": "やめたい師", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/075.jpg" },
+  { "id": 76, "name": "もうせん和尚", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/076.jpg" },
+  { "id": 77, "name": "わすれん帽", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/077.jpg" },
+  { "id": 78, "name": "メゾン・ドワスレ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/078.jpg" },
+  { "id": 79, "name": "ばか頭巾", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/079.jpg" },
+  { "id": 80, "name": "そらミミズク", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/080.jpg" },
+  { "id": 81, "name": "じごくミミズク", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/081.jpg" },
+  { "id": 82, "name": "ナンデナン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/082.jpg" },
+  { "id": 83, "name": "そーナンだー", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/083.jpg" },
+  { "id": 84, "name": "のっぺら坊", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/084.jpg" },
+  { "id": 85, "name": "ハナホ人", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/085.jpg" },
+  { "id": 86, "name": "ひじょうぐち", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/086.jpg" },
+  { "id": 87, "name": "まるナゲット", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/087.jpg" },
+  { "id": 88, "name": "ピントコーン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/088.jpg" },
+  { "id": 89, "name": "カラヤブリ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/089.jpg" },
+  { "id": 90, "name": "わらえ姉", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/090.jpg" },
+  { "id": 91, "name": "青くちびる", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/091.jpg" },
+  { "id": 92, "name": "バクロ婆", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/092.jpg" },
+  { "id": 93, "name": "ババァーン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/093.jpg" },
+  { "id": 94, "name": "ドクロ婆", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/094.jpg" },
+  { "id": 95, "name": "モテモ天", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/095.jpg" },
+  { "id": 96, "name": "モテマクール", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/096.jpg" },
+  { "id": 97, "name": "モテヌス", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/097.jpg" },
+  { "id": 98, "name": "一旦ゴメン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/098.jpg" },
+  { "id": 99, "name": "あやまり倒し", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/099.jpg" },
+  { "id": 100, "name": "こえんら", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/100.jpg" },
+  { "id": 101, "name": "えんらえんら", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/101.jpg" },
+  { "id": 102, "name": "でんぱく小僧", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/102.jpg" },
+  { "id": 103, "name": "でんじん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/103.jpg" },
+  { "id": 104, "name": "おでんじん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/104.jpg" },
+  { "id": 105, "name": "はつでんしん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/105.jpg" },
+  { "id": 106, "name": "U.S.O.", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/106.jpg" },
+  { "id": 107, "name": "アペリカン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/107.jpg" },
+  { "id": 108, "name": "フウ2", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/108.jpg" },
+  { "id": 109, "name": "スットン卿", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/109.jpg" },
+  { "id": 110, "name": "家ーイ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/110.jpg" },
+  { "id": 111, "name": "レインボーン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/111.jpg" },
+  { "id": 112, "name": "ペラペライオン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/112.jpg" },
+  { "id": 113, "name": "まぼ老師", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/113.jpg" },
+  { "id": 114, "name": "かげ老師", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/114.jpg" },
+  { "id": 115, "name": "ほう老師", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/115.jpg" },
+  { "id": 116, "name": "さとりちゃん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/116.jpg" },
+  { "id": 117, "name": "よつめ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/117.jpg" },
+  { "id": 118, "name": "うんがい鏡", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/118.jpg" },
+  { "id": 119, "name": "うんがい三面鏡", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/119.jpg" },
+  { "id": 120, "name": "ヤミ鏡", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/120.jpg" },
+  { "id": 121, "name": "セバスチャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/121.jpg" },
+  { "id": 122, "name": "せいでん鬼", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/122.jpg" },
+  { "id": 123, "name": "なぞトキ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/123.jpg" },
+  { "id": 124, "name": "紙かくし", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/124.jpg" },
+  { "id": 125, "name": "ヒマ神", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/125.jpg" },
+  { "id": 126, "name": "ミス・テリー", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/126.jpg" },
+  { "id": 127, "name": "ニャン魔女", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/127.jpg" },
+  { "id": 128, "name": "オトナカイ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/128.jpg" },
+  { "id": 129, "name": "天狗", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/130.jpg" },
+  { "id": 130, "name": "ほむら天狗", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/130.jpg" },
+  { "id": 131, "name": "キュウビ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/131.jpg" },
+  { "id": 132, "name": "犬神", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/132.jpg" },
+  { "id": 133, "name": "ぬえ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/133.jpg" },
+  { "id": 134, "name": "風魔猿", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/134.jpg" },
+  { "id": 135, "name": "鬼ガマ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/135.jpg" },
+  { "id": 136, "name": "酒呑童子", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/136.jpg" },
+  { "id": 137, "name": "バニー・ミント", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/137.jpg" },
+  { "id": 138, "name": "スノーラビィ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/138.jpg" },
+  { "id": 139, "name": "マイッカー", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/139.jpg" },
+  { "id": 140, "name": "だるだるま", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/140.jpg" },
+  { "id": 141, "name": "だるまっちょ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/141.jpg" },
+  { "id": 142, "name": "ゴリだるま", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/142.jpg" },
+  { "id": 143, "name": "うらや飯", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/143.jpg" },
+  { "id": 144, "name": "プライ丼", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/144.jpg" },
+  { "id": 145, "name": "迷い車", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/145.jpg" },
+  { "id": 146, "name": "だっせんしゃ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/146.jpg" },
+  { "id": 147, "name": "ドキ土器", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/147.jpg" },
+  { "id": 148, "name": "怒気ドキ土器", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/148.jpg" },
+  { "id": 149, "name": "ムリカベ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/149.jpg" },
+  { "id": 150, "name": "むりだ城", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/150.jpg" },
+  { "id": 151, "name": "シロカベ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/151.jpg" },
+  { "id": 152, "name": "グレるりん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/152.jpg" },
+  { "id": 153, "name": "ゴクドー", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/153.jpg" },
+  { "id": 154, "name": "アニ鬼", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/154.jpg" },
+  { "id": 155, "name": "ブルックりん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/155.jpg" },
+  { "id": 156, "name": "あまん汁", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/156.jpg" },
+  { "id": 157, "name": "ギュウ汁", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/157.jpg" },
+  { "id": 158, "name": "ポン骨", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/158.jpg" },
+  { "id": 159, "name": "リボーン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/159.jpg" },
+  { "id": 160, "name": "ヨロイさん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/160.jpg" },
+  { "id": 161, "name": "モノマネキン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/161.jpg" },
+  { "id": 162, "name": "オーバーガー", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/162.jpg" },
+  { "id": 163, "name": "魔ウンテン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/163.jpg" },
+  { "id": 164, "name": "トオセンボン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/164.jpg" },
+  { "id": 165, "name": "くろがねセンボン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/165.jpg" },
+  { "id": 166, "name": "すもうどん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/166.jpg" },
+  { "id": 167, "name": "横綱うどん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/167.jpg" },
+  { "id": 168, "name": "あっそう山", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/168.jpg" },
+  { "id": 169, "name": "あそっ火山", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/169.jpg" },
+  { "id": 170, "name": "モレゾウ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/170.jpg" },
+  { "id": 171, "name": "プルファント", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/171.jpg" },
+  { "id": 172, "name": "ガマンモス", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/172.jpg" },
+  { "id": 173, "name": "雷蔵", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/173.jpg" },
+  { "id": 174, "name": "ヒライ神", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/174.jpg" },
+  { "id": 175, "name": "あっけら艦", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/175.jpg" },
+  { "id": 176, "name": "シレイ艦", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/176.jpg" },
+  { "id": 177, "name": "あせっか鬼", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/177.jpg" },
+  { "id": 178, "name": "シングコング", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/178.jpg" },
+  { "id": 179, "name": "カメッパ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/179.jpg" },
+  { "id": 180, "name": "おくらいり", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/180.jpg" },
+  { "id": 181, "name": "カクさん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/181.jpg" },
+  { "id": 182, "name": "ふじのやま", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/182.jpg" },
+  { "id": 183, "name": "さくらのじま", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/183.jpg" },
+  { "id": 184, "name": "ドウカク", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/184.jpg" },
+  { "id": 185, "name": "ギンカク", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/185.jpg" },
+  { "id": 186, "name": "キンカク", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/186.jpg" },
+  { "id": 187, "name": "プラチナカク", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/187.jpg" },
+  { "id": 188, "name": "イヌニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/188.jpg" },
+  { "id": 189, "name": "武者かぶと", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/189.jpg" },
+  { "id": 190, "name": "かぶと無双", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/190.jpg" },
+  { "id": 191, "name": "オオツノノ神", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/191.jpg" },
+  { "id": 192, "name": "キンタロニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/192.jpg" },
+  { "id": 193, "name": "ステーキング", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/193.jpg" },
+  { "id": 194, "name": "ロボニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/194.jpg" },
+  { "id": 195, "name": "ロボニャンF型", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/195.jpg" },
+  { "id": 196, "name": "ロボニャンUSA", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/196.jpg" },
+  { "id": 197, "name": "ゴルニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/197.jpg" },
+  { "id": 198, "name": "だいだらぼっち", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/198.jpg" },
+  { "id": 199, "name": "うみぼうず", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/199.jpg" },
+  { "id": 200, "name": "大ガマ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/200.jpg" },
+  { "id": 201, "name": "大やもり", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/201.jpg" },
+  { "id": 202, "name": "赤鬼", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/202.jpg" },
+  { "id": 203, "name": "青鬼", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/203.jpg" },
+  { "id": 204, "name": "黒鬼", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/204.jpg" },
+  { "id": 205, "name": "カブキロイド", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/205.jpg" },
+  { "id": 206, "name": "ザ・シャーク", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/206.jpg" },
+  { "id": 207, "name": "エル・シャクレロ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/207.jpg" },
+  { "id": 208, "name": "スカイシャリマン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/208.jpg" },
+  { "id": 209, "name": "びきゃく", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/209.jpg" },
+  { "id": 210, "name": "ピヨピヨコ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/210.jpg" },
+  { "id": 211, "name": "ほっとけーキ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/211.jpg" },
+  { "id": 212, "name": "いきあたりバッタ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/212.jpg" },
+  { "id": 213, "name": "しゃれこ婦人", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/213.jpg" },
+  { "id": 214, "name": "カラカラさん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/214.jpg" },
+  { "id": 215, "name": "ほね美人", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/215.jpg" },
+  { "id": 216, "name": "セミまる", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/216.jpg" },
+  { "id": 217, "name": "カゲまる", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/217.jpg" },
+  { "id": 218, "name": "ヒグラシまる", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/218.jpg" },
+  { "id": 219, "name": "こてんパン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/219.jpg" },
+  { "id": 220, "name": "大化ケット", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/220.jpg" },
+  { "id": 221, "name": "さむガリ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/221.jpg" },
+  { "id": 222, "name": "ガリ王子", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/222.jpg" },
+  { "id": 223, "name": "あつガルル", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/223.jpg" },
+  { "id": 224, "name": "アンビリバ坊", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/224.jpg" },
+  { "id": 225, "name": "バッド坊や", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/225.jpg" },
+  { "id": 226, "name": "激辛ボーイ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/226.jpg" },
+  { "id": 227, "name": "つらがわり", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/227.jpg" },
+  { "id": 228, "name": "一つ目小僧", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/228.jpg" },
+  { "id": 229, "name": "コンたん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/229.jpg" },
+  { "id": 230, "name": "わかランナー", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/230.jpg" },
+  { "id": 231, "name": "寝コロンブス", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/231.jpg" },
+  { "id": 232, "name": "デモネード", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/232.jpg" },
+  { "id": 233, "name": "バク", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/233.jpg" },
+  { "id": 234, "name": "ハク", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/234.jpg" },
+  { "id": 235, "name": "おバク様", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/235.jpg" },
+  { "id": 236, "name": "江戸っ子パンダ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/236.jpg" },
+  { "id": 237, "name": "大江戸忍者パンダ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/237.jpg" },
+  { "id": 238, "name": "カンペちゃん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/238.jpg" },
+  { "id": 239, "name": "無茶ぶりっ子", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/239.jpg" },
+  { "id": 240, "name": "ノガッパ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/240.jpg" },
+  { "id": 241, "name": "たびガッパ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/241.jpg" },
+  { "id": 242, "name": "なみガッパ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/242.jpg" },
+  { "id": 243, "name": "ジバニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/243.jpg" },
+  { "id": 244, "name": "Bジバニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/244.jpg" },
+  { "id": 245, "name": "ジバニャンS", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/245.jpg" },
+  { "id": 246, "name": "ジバニャン劉備", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/246.jpg" },
+  { "id": 247, "name": "アカマル", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/247.jpg" },
+  { "id": 248, "name": "トゲニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/248.jpg" },
+  { "id": 249, "name": "ワルニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/249.jpg" },
+  { "id": 250, "name": "ブチニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/250.jpg" },
+  { "id": 251, "name": "コマさん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/251.jpg" },
+  { "id": 252, "name": "ししコマ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/252.jpg" },
+  { "id": 253, "name": "Bコマさん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/253.jpg" },
+  { "id": 254, "name": "コマさんS", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/254.jpg" },
+  { "id": 255, "name": "コマさん孫策", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/255.jpg" },
+  { "id": 256, "name": "ジバコマ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/256.jpg" },
+  { "id": 257, "name": "コマじろう", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/257.jpg" },
+  { "id": 258, "name": "とらじろう", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/258.jpg" },
+  { "id": 259, "name": "コマじろうS", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/259.jpg" },
+  { "id": 260, "name": "雨女", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/260.jpg" },
+  { "id": 261, "name": "ばくそく", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/261.jpg" },
+  { "id": 262, "name": "ナンスカンク", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/262.jpg" },
+  { "id": 263, "name": "おきラクーン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/263.jpg" },
+  { "id": 264, "name": "おとなブル", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/264.jpg" },
+  { "id": 265, "name": "たまのこし", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/265.jpg" },
+  { "id": 266, "name": "キュン太郎", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/266.jpg" },
+  { "id": 267, "name": "ズキュキュン太", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/267.jpg" },
+  { "id": 268, "name": "裏キュン太", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/268.jpg" },
+  { "id": 269, "name": "ケマモン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/269.jpg" },
+  { "id": 270, "name": "ワンダーニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/270.jpg" },
+  { "id": 271, "name": "ジェットニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/271.jpg" },
+  { "id": 272, "name": "サルニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/272.jpg" },
+  { "id": 273, "name": "トムニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/273.jpg" },
+  { "id": 274, "name": "KKブラザーズ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/274.jpg" },
+  { "id": 275, "name": "ゆきおんな", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/275.jpg" },
+  { "id": 276, "name": "ふぶき姫", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/276.jpg" },
+  { "id": 277, "name": "百鬼姫", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/277.jpg" },
+  { "id": 278, "name": "メロンニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/278.jpg" },
+  { "id": 279, "name": "ミカンニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/279.jpg" },
+  { "id": 280, "name": "キウイニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/280.jpg" },
+  { "id": 281, "name": "ブドウニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/281.jpg" },
+  { "id": 282, "name": "イチゴニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/282.jpg" },
+  { "id": 283, "name": "スイカニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/283.jpg" },
+  { "id": 284, "name": "サファイニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/284.jpg" },
+  { "id": 285, "name": "エメラルニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/285.jpg" },
+  { "id": 286, "name": "ルビーニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/286.jpg" },
+  { "id": 287, "name": "トパニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/287.jpg" },
+  { "id": 288, "name": "ダイヤニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/288.jpg" },
+  { "id": 289, "name": "ロボガッパ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/289.jpg" },
+  { "id": 290, "name": "ロボコマ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/290.jpg" },
+  { "id": 291, "name": "セーラーニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/291.jpg" },
+  { "id": 292, "name": "レッドJ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/292.jpg" },
+  { "id": 293, "name": "マイティードッグ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/293.jpg" },
+  { "id": 294, "name": "かまいたち", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/294.jpg" },
+  { "id": 295, "name": "チョコボニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/295.jpg" },
+  { "id": 296, "name": "モーグリニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/296.jpg" },
+  { "id": 297, "name": "ぷにニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/297.jpg" },
+  { "id": 298, "name": "ぷにコマ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/298.jpg" },
+  { "id": 299, "name": "スシジバ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/299.jpg" },
+  { "id": 300, "name": "天コマ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/300.jpg" },
+  { "id": 301, "name": "河童", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/301.jpg" },
+  { "id": 302, "name": "水虎", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/302.jpg" },
+  { "id": 303, "name": "マスターニャーダ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/303.jpg" },
+  { "id": 304, "name": "烏天狗", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/304.jpg" },
+  { "id": 305, "name": "カルラ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/305.jpg" },
+  { "id": 306, "name": "から傘お化け", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/306.jpg" },
+  { "id": 307, "name": "モ作", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/307.jpg" },
+  { "id": 308, "name": "ハーモリー", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/308.jpg" },
+  { "id": 309, "name": "うらやましろう", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/309.jpg" },
+  { "id": 310, "name": "つまみぐいのすけ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/310.jpg" },
+  { "id": 311, "name": "ワカメくん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/311.jpg" },
+  { "id": 312, "name": "ワカメ☆スター", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/312.jpg" },
+  { "id": 313, "name": "コンブさん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/313.jpg" },
+  { "id": 314, "name": "メカブちゃん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/314.jpg" },
+  { "id": 315, "name": "モズク先生", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/315.jpg" },
+  { "id": 316, "name": "ひも爺", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/316.jpg" },
+  { "id": 317, "name": "くいい爺", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/317.jpg" },
+  { "id": 318, "name": "こめ爺", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/318.jpg" },
+  { "id": 319, "name": "ハングリーG", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/319.jpg" },
+  { "id": 320, "name": "キズナメコ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/320.jpg" },
+  { "id": 321, "name": "キズナース", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/321.jpg" },
+  { "id": 322, "name": "砂夫", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/322.jpg" },
+  { "id": 323, "name": "大山砂夫", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/323.jpg" },
+  { "id": 324, "name": "風呂ずきん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/324.jpg" },
+  { "id": 325, "name": "ふろーラル", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/325.jpg" },
+  { "id": 326, "name": "アフロ13", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/326.jpg" },
+  { "id": 327, "name": "テンテコ米", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/327.jpg" },
+  { "id": 328, "name": "あしたガール", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/328.jpg" },
+  { "id": 329, "name": "どっちつかず", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/329.jpg" },
+  { "id": 330, "name": "ポチッ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/330.jpg" },
+  { "id": 331, "name": "ウキウキビ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/331.jpg" },
+  { "id": 332, "name": "トキメキビ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/332.jpg" },
+  { "id": 333, "name": "びんボーイ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/334.jpg" },
+  { "id": 334, "name": "お金ナイダー", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/334.jpg" },
+  { "id": 335, "name": "らくてん童", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/335.jpg" },
+  { "id": 336, "name": "ざしきわらし", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/336.jpg" },
+  { "id": 337, "name": "ざしきわら神", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/337.jpg" },
+  { "id": 338, "name": "ぜっこう蝶", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/338.jpg" },
+  { "id": 339, "name": "ゼッコウ蝶", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/339.jpg" },
+  { "id": 340, "name": "サイコウ蝶", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/340.jpg" },
+  { "id": 341, "name": "アゲアゲハ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/341.jpg" },
+  { "id": 342, "name": "くだん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/342.jpg" },
+  { "id": 343, "name": "大くだん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/343.jpg" },
+  { "id": 344, "name": "どんちゃん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/344.jpg" },
+  { "id": 345, "name": "晴れ男", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/345.jpg" },
+  { "id": 346, "name": "サンタク老師", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/346.jpg" },
+  { "id": 347, "name": "ふくろじじい", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/347.jpg" },
+  { "id": 348, "name": "カンガエルー", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/348.jpg" },
+  { "id": 349, "name": "はなしカミ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/349.jpg" },
+  { "id": 350, "name": "サンデーパパ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/350.jpg" },
+  { "id": 351, "name": "ガッテンマイヤー", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/351.jpg" },
+  { "id": 352, "name": "エコロ爺", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/352.jpg" },
+  { "id": 353, "name": "イーセンイッテル", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/353.jpg" },
+  { "id": 354, "name": "カントリーバァバ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/354.jpg" },
+  { "id": 355, "name": "ホノボーノ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/355.jpg" },
+  { "id": 356, "name": "ヒョウヘンヌ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/356.jpg" },
+  { "id": 357, "name": "ヒョウヘンナ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/357.jpg" },
+  { "id": 358, "name": "キジニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/358.jpg" },
+  { "id": 359, "name": "ハッピィさん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/359.jpg" },
+  { "id": 360, "name": "歯磨貴婦人", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/360.jpg" },
+  { "id": 361, "name": "ロボG", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/361.jpg" },
+  { "id": 362, "name": "さいの目入道", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/362.jpg" },
+  { "id": 363, "name": "ゾロ目大明神", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/363.jpg" },
+  { "id": 364, "name": "から傘魔人", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/364.jpg" },
+  { "id": 365, "name": "ウラシマニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/365.jpg" },
+  { "id": 366, "name": "いたれりつくせり", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/366.jpg" },
+  { "id": 367, "name": "雷オトン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/367.jpg" },
+  { "id": 368, "name": "絶オジイ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/368.jpg" },
+  { "id": 369, "name": "聖オカン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/369.jpg" },
+  { "id": 370, "name": "心オバア", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/370.jpg" },
+  { "id": 371, "name": "麒麟", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/371.jpg" },
+  { "id": 372, "name": "イッカク", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/372.jpg" },
+  { "id": 373, "name": "スピーディーW", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/373.jpg" },
+  { "id": 374, "name": "カンフーマッハ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/374.jpg" },
+  { "id": 375, "name": "やるせナス", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/375.jpg" },
+  { "id": 376, "name": "チクリ魔", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/376.jpg" },
+  { "id": 377, "name": "ちらかし家来", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/377.jpg" },
+  { "id": 378, "name": "みちび鬼", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/378.jpg" },
+  { "id": 379, "name": "えこひい鬼", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/379.jpg" },
+  { "id": 380, "name": "かたのり小僧", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/380.jpg" },
+  { "id": 381, "name": "かたのり親方", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/381.jpg" },
+  { "id": 382, "name": "ぎっくり男", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/382.jpg" },
+  { "id": 383, "name": "草くいおとこ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/383.jpg" },
+  { "id": 384, "name": "肉くいおとこ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/384.jpg" },
+  { "id": 385, "name": "TETSUYA", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/385.jpg" },
+  { "id": 386, "name": "KANTETSU", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/386.jpg" },
+  { "id": 387, "name": "つぶや木", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/387.jpg" },
+  { "id": 388, "name": "ツリート", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/388.jpg" },
+  { "id": 389, "name": "ネガティブーン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/389.jpg" },
+  { "id": 390, "name": "ジャネガブーン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/390.jpg" },
+  { "id": 391, "name": "かゆかゆ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/391.jpg" },
+  { "id": 392, "name": "ジミー", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/392.jpg" },
+  { "id": 393, "name": "カゲロー", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/393.jpg" },
+  { "id": 394, "name": "カイム", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/394.jpg" },
+  { "id": 395, "name": "カリカリベーコン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/395.jpg" },
+  { "id": 396, "name": "ぎしんあん鬼", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/396.jpg" },
+  { "id": 397, "name": "ガ鬼", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/397.jpg" },
+  { "id": 398, "name": "あまのじゃく", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/398.jpg" },
+  { "id": 399, "name": "ジンギスギスカン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/399.jpg" },
+  { "id": 400, "name": "チンギスギスハン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/400.jpg" },
+  { "id": 401, "name": "ヒキコウモリ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/401.jpg" },
+  { "id": 402, "name": "トジコウモリ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/402.jpg" },
+  { "id": 403, "name": "ヤドコウモリ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/403.jpg" },
+  { "id": 404, "name": "かりパックン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/404.jpg" },
+  { "id": 405, "name": "泥ボックン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/405.jpg" },
+  { "id": 406, "name": "ギーくん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/406.jpg" },
+  { "id": 407, "name": "ハッキング", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/407.jpg" },
+  { "id": 408, "name": "ひとまか仙人", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/408.jpg" },
+  { "id": 409, "name": "りもこんかくし", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/409.jpg" },
+  { "id": 410, "name": "ジコチュウ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/410.jpg" },
+  { "id": 411, "name": "じこけん王", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/411.jpg" },
+  { "id": 412, "name": "インチキン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/412.jpg" },
+  { "id": 413, "name": "あんのジョー", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/413.jpg" },
+  { "id": 414, "name": "アイタタタイムズ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/414.jpg" },
+  { "id": 415, "name": "ゴジダツ爺", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/415.jpg" },
+  { "id": 416, "name": "ネクラマテング", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/416.jpg" },
+  { "id": 417, "name": "ヨミテング", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/417.jpg" },
+  { "id": 418, "name": "まてんし", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/418.jpg" },
+  { "id": 419, "name": "リー夫人", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/419.jpg" },
+  { "id": 420, "name": "ガブニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/420.jpg" },
+  { "id": 421, "name": "カッパー", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/421.jpg" },
+  { "id": 422, "name": "ダリス", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/422.jpg" },
+  { "id": 423, "name": "USAピョン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/423.jpg" },
+  { "id": 424, "name": "USAピョン(アメフト)", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/424.jpg" },
+  { "id": 425, "name": "USAピョン(マリン)", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/425.jpg" },
+  { "id": 426, "name": "USAピョン(ミリタリー)", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/426.jpg" },
+  { "id": 427, "name": "USAピョン(ドライビング)", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/427.jpg" },
+  { "id": 428, "name": "B-USAピョン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/428.jpg" },
+  { "id": 429, "name": "USAピョン仲達", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/429.jpg" },
+  { "id": 430, "name": "ミツマタノヅチ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/430.jpg" },
+  { "id": 431, "name": "魔ガサス", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/431.jpg" },
+  { "id": 432, "name": "ウ魔", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/432.jpg" },
+  { "id": 433, "name": "ガシャどくろ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/433.jpg" },
+  { "id": 434, "name": "デビビル", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/434.jpg" },
+  { "id": 435, "name": "デビビラン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/435.jpg" },
+  { "id": 436, "name": "虫歯伯爵", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/436.jpg" },
+  { "id": 437, "name": "百々目鬼", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/437.jpg" },
+  { "id": 438, "name": "きらめ鬼", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/438.jpg" },
+  { "id": 439, "name": "ドケチング", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/439.jpg" },
+  { "id": 440, "name": "ヤミまろ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/440.jpg" },
+  { "id": 441, "name": "どんどろ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/441.jpg" },
+  { "id": 442, "name": "ヤミキュウビ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/442.jpg" },
+  { "id": 443, "name": "ゼロ博士", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/443.jpg" },
+  { "id": 444, "name": "Dr.カゲムラ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/444.jpg" },
+  { "id": 445, "name": "魔天王", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/445.jpg" },
+  { "id": 446, "name": "かえりタイ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/446.jpg" },
+  { "id": 447, "name": "やぶレター", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/447.jpg" },
+  { "id": 448, "name": "てのひらがえし", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/448.jpg" },
+  { "id": 449, "name": "あしでまとい", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/449.jpg" },
+  { "id": 450, "name": "イガイガグリ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/450.jpg" },
+  { "id": 451, "name": "チクチクウニ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/451.jpg" },
+  { "id": 452, "name": "じめりんぼう", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/452.jpg" },
+  { "id": 453, "name": "雨ふらし", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/453.jpg" },
+  { "id": 454, "name": "こおりんぼう", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/454.jpg" },
+  { "id": 455, "name": "化けあられ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/455.jpg" },
+  { "id": 456, "name": "たらりん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/456.jpg" },
+  { "id": 457, "name": "ヨコドリ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/457.jpg" },
+  { "id": 458, "name": "ぶんぶん鳥", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/458.jpg" },
+  { "id": 459, "name": "はらおドリ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/459.jpg" },
+  { "id": 460, "name": "おともらし", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/460.jpg" },
+  { "id": 461, "name": "爆音ならし", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/461.jpg" },
+  { "id": 462, "name": "トホホギス", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/462.jpg" },
+  { "id": 463, "name": "ブカッコウ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/463.jpg" },
+  { "id": 464, "name": "死神鳥", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/464.jpg" },
+  { "id": 465, "name": "じんめん犬", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/465.jpg" },
+  { "id": 466, "name": "かおベロス", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/466.jpg" },
+  { "id": 467, "name": "三途の犬", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/467.jpg" },
+  { "id": 468, "name": "けうけげん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/468.jpg" },
+  { "id": 469, "name": "ふさふさん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/469.jpg" },
+  { "id": 470, "name": "たいこモチ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/470.jpg" },
+  { "id": 471, "name": "ごまスリー", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/471.jpg" },
+  { "id": 472, "name": "認MEN", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/472.jpg" },
+  { "id": 473, "name": "黄ばんドール", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/473.jpg" },
+  { "id": 474, "name": "ふあんかん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/474.jpg" },
+  { "id": 475, "name": "たらいまわし", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/475.jpg" },
+  { "id": 476, "name": "口だけおんな", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/476.jpg" },
+  { "id": 477, "name": "おつぼね様", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/477.jpg" },
+  { "id": 478, "name": "ドンヨリーヌ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/478.jpg" },
+  { "id": 479, "name": "シメッポイーナ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/479.jpg" },
+  { "id": 480, "name": "砂ン丘入道", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/480.jpg" },
+  { "id": 481, "name": "ノー砂ン丘入道", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/481.jpg" },
+  { "id": 482, "name": "じがじぃさん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/482.jpg" },
+  { "id": 483, "name": "のらりくらり", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/483.jpg" },
+  { "id": 484, "name": "おすべり様", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/484.jpg" },
+  { "id": 485, "name": "おしっしょう", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/485.jpg" },
+  { "id": 486, "name": "おひとり様", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/486.jpg" },
+  { "id": 487, "name": "テンパるンバ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/487.jpg" },
+  { "id": 488, "name": "こしパンダ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/488.jpg" },
+  { "id": 489, "name": "おならず者", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/489.jpg" },
+  { "id": 490, "name": "へこ鬼神", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/490.jpg" },
+  { "id": 491, "name": "花子さん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/491.jpg" },
+  { "id": 492, "name": "呪野花子", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/492.jpg" },
+  { "id": 493, "name": "ロボメン犬", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/493.jpg" },
+  { "id": 494, "name": "けちらし", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/494.jpg" },
+  { "id": 495, "name": "アンラッキィさん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/495.jpg" },
+  { "id": 496, "name": "ヨッチャ～", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/496.jpg" },
+  { "id": 497, "name": "しわくちゃん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/497.jpg" },
+  { "id": 498, "name": "老いらん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/498.jpg" },
+  { "id": 499, "name": "ふじみ御前", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/499.jpg" },
+  { "id": 500, "name": "のぼせトンマン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/500.jpg" },
+  { "id": 501, "name": "ダークニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/501.jpg" },
+  { "id": 502, "name": "決めて魔王", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/502.jpg" },
+  { "id": 503, "name": "おとろし", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/503.jpg" },
+  { "id": 504, "name": "フゥミン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/504.jpg" },
+  { "id": 505, "name": "おねむの精", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/505.jpg" },
+  { "id": 506, "name": "土蜘蛛", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/506.jpg" },
+  { "id": 507, "name": "女郎蜘蛛", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/507.jpg" },
+  { "id": 508, "name": "オリジン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/508.jpg" },
+  { "id": 509, "name": "ファントム", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/509.jpg" },
+  { "id": 510, "name": "サキちゃん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/510.jpg" },
+  { "id": 511, "name": "ねちがえる", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/511.jpg" },
+  { "id": 512, "name": "バンジーきゅうす", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/512.jpg" },
+  { "id": 513, "name": "マイマイペース", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/513.jpg" },
+  { "id": 514, "name": "ダソックス", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/514.jpg" },
+  { "id": 515, "name": "アーダコンダ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/515.jpg" },
+  { "id": 516, "name": "ツチノコ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/516.jpg" },
+  { "id": 517, "name": "フクリュウ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/517.jpg" },
+  { "id": 518, "name": "ツチノコパンダ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/518.jpg" },
+  { "id": 519, "name": "ツチノコ星人", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/519.jpg" },
+  { "id": 520, "name": "からみぞん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/520.jpg" },
+  { "id": 521, "name": "こんがらギャル", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/521.jpg" },
+  { "id": 522, "name": "オッタマゲーター", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/522.jpg" },
+  { "id": 523, "name": "ナンモナイト", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/523.jpg" },
+  { "id": 524, "name": "カイーギョ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/524.jpg" },
+  { "id": 525, "name": "笑ウツボ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/525.jpg" },
+  { "id": 526, "name": "歌ウナギ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/526.jpg" },
+  { "id": 527, "name": "大蛇のツボ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/527.jpg" },
+  { "id": 528, "name": "たこやっ鬼", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/528.jpg" },
+  { "id": 529, "name": "たこや鬼神", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/529.jpg" },
+  { "id": 530, "name": "キライギョ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/530.jpg" },
+  { "id": 531, "name": "ゾウオ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/531.jpg" },
+  { "id": 532, "name": "ギャクジョウオ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/532.jpg" },
+  { "id": 533, "name": "おもいだスッポン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/533.jpg" },
+  { "id": 534, "name": "おもいだ神", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/534.jpg" },
+  { "id": 535, "name": "ムカムカデ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/535.jpg" },
+  { "id": 536, "name": "激ドラゴン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/536.jpg" },
+  { "id": 537, "name": "りゅーくん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/537.jpg" },
+  { "id": 538, "name": "龍神", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/538.jpg" },
+  { "id": 539, "name": "青龍", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/539.jpg" },
+  { "id": 540, "name": "にんぎょ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/540.jpg" },
+  { "id": 541, "name": "八百比丘尼", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/541.jpg" },
+  { "id": 542, "name": "イザナミ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/542.jpg" },
+  { "id": 543, "name": "ダイナシー", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/543.jpg" },
+  { "id": 544, "name": "D-レックス", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/544.jpg" },
+  { "id": 545, "name": "ドジラ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/545.jpg" },
+  { "id": 546, "name": "ろくろ首", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/546.jpg" },
+  { "id": 547, "name": "ウィスパー", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/547.jpg" },
+  { "id": 548, "name": "ウィスベェ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/548.jpg" },
+  { "id": 549, "name": "キリスギリス", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/549.jpg" },
+  { "id": 550, "name": "ひっぱりダコ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/550.jpg" },
+  { "id": 551, "name": "たこうらみ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/551.jpg" },
+  { "id": 552, "name": "ボー坊", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/552.jpg" },
+  { "id": 553, "name": "しどろもどろ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/553.jpg" },
+  { "id": 554, "name": "ミチクサメ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/554.jpg" },
+  { "id": 555, "name": "トーシロザメ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/555.jpg" },
+  { "id": 556, "name": "ムダヅカイ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/556.jpg" },
+  { "id": 557, "name": "はらわシェル", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/557.jpg" },
+  { "id": 558, "name": "ナガバナ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/558.jpg" },
+  { "id": 559, "name": "ナガバナナ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/559.jpg" },
+  { "id": 560, "name": "チョコバナーナ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/560.jpg" },
+  { "id": 561, "name": "ホリュウ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/561.jpg" },
+  { "id": 562, "name": "ロボノコ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/562.jpg" },
+  { "id": 563, "name": "ロボりゅーくん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/563.jpg" },
+  { "id": 564, "name": "油すまし", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/564.jpg" },
+  { "id": 565, "name": "しきるん蛇", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/565.jpg" },
+  { "id": 566, "name": "すねスネーク", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/566.jpg" },
+  { "id": 567, "name": "まむし行司", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/567.jpg" },
+  { "id": 568, "name": "つられたろう丸", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/568.jpg" },
+  { "id": 569, "name": "おれリュウ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/569.jpg" },
+  { "id": 570, "name": "オロチ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/570.jpg" },
+  { "id": 571, "name": "影オロチ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/571.jpg" },
+  { "id": 572, "name": "センポクカンポク", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/572.jpg" },
+  { "id": 573, "name": "マッサラニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/573.jpg" },
+  { "id": 574, "name": "アンドロイド山田", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/574.jpg" },
+  { "id": 575, "name": "厄怪", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/575.jpg" },
+  { "id": 576, "name": "不怪", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/576.jpg" },
+  { "id": 577, "name": "豪怪", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/577.jpg" },
+  { "id": 578, "name": "難怪", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/578.jpg" },
+  { "id": 579, "name": "破怪", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/579.jpg" },
+  { "id": 580, "name": "あかなめ・怪", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/580.jpg" },
+  { "id": 581, "name": "泥田坊・怪", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/581.jpg" },
+  { "id": 582, "name": "えんらえんら・怪", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/582.jpg" },
+  { "id": 583, "name": "河童・怪", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/583.jpg" },
+  { "id": 584, "name": "から傘お化け・怪", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/584.jpg" },
+  { "id": 585, "name": "ざしきわらし・怪", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/585.jpg" },
+  { "id": 586, "name": "くだん・怪", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/586.jpg" },
+  { "id": 587, "name": "けうけげん・怪", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/587.jpg" },
+  { "id": 588, "name": "にんぎょ・怪", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/588.jpg" },
+  { "id": 589, "name": "ろくろ首・怪", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/589.jpg" },
+  { "id": 590, "name": "ジバニャンK", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/590.jpg" },
+  { "id": 591, "name": "USAピョンQ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/591.jpg" },
+  { "id": 592, "name": "コマさんJ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/592.jpg" },
+  { "id": 593, "name": "コマじゅうろう", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/593.jpg" },
+  { "id": 594, "name": "フユニャンエース", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/594.jpg" },
+  { "id": 595, "name": "ウィスババ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/595.jpg" },
+  { "id": 596, "name": "弁財天", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/596.jpg" },
+  { "id": 597, "name": "布袋尊", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/597.jpg" },
+  { "id": 598, "name": "大黒天", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/598.jpg" },
+  { "id": 599, "name": "恵比寿", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/599.jpg" },
+  { "id": 600, "name": "毘沙門天", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/600.jpg" },
+  { "id": 601, "name": "コロンブス", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/601.jpg" },
+  { "id": 602, "name": "エジソン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/602.jpg" },
+  { "id": 603, "name": "ダーウィン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/603.jpg" },
+  { "id": 604, "name": "ラストブシニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/604.jpg" },
+  { "id": 605, "name": "キラコマ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/605.jpg" },
+  { "id": 606, "name": "プラチナ鬼", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/606.jpg" },
+  { "id": 607, "name": "ブルジョワG", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/607.jpg" },
+  { "id": 608, "name": "ブシニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/608.jpg" },
+  { "id": 609, "name": "しゅらコマ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/609.jpg" },
+  { "id": 610, "name": "山吹鬼", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/610.jpg" },
+  { "id": 611, "name": "ネタバレリーナ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/611.jpg" },
+  { "id": 612, "name": "花さか爺", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/612.jpg" },
+  { "id": 613, "name": "うんちく魔", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/613.jpg" },
+  { "id": 614, "name": "イケメン犬", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/614.jpg" },
+  { "id": 615, "name": "やまタン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/615.jpg" },
+  { "id": 616, "name": "ばたんQ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/616.jpg" },
+  { "id": 617, "name": "乙姫", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/617.jpg" },
+  { "id": 618, "name": "あしゅら", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/618.jpg" },
+  { "id": 619, "name": "ニャーミネーター", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/619.jpg" },
+  { "id": 620, "name": "ヒーローニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/620.jpg" },
+  { "id": 621, "name": "フユニャンS", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/621.jpg" },
+  { "id": 622, "name": "フユニャン曹操", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/622.jpg" },
+  { "id": 623, "name": "ひとりよがり", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/623.jpg" },
+  { "id": 624, "name": "ウォール・ガイ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/624.jpg" },
+  { "id": 625, "name": "ガランドゥ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/625.jpg" },
+  { "id": 626, "name": "バケルトン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/626.jpg" },
+  { "id": 627, "name": "メカオロチ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/627.jpg" },
+  { "id": 628, "name": "黒鬼呂布", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/628.jpg" },
+  { "id": 629, "name": "メカキュウビ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/629.jpg" },
+  { "id": 630, "name": "Uロボニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/630.jpg" },
+  { "id": 631, "name": "デバミ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/631.jpg" },
+  { "id": 632, "name": "しらんプリン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/632.jpg" },
+  { "id": 633, "name": "ミーフー", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/633.jpg" },
+  { "id": 634, "name": "コアラニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/634.jpg" },
+  { "id": 635, "name": "Tジバニャン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/635.jpg" },
+  { "id": 636, "name": "Tコマさん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/636.jpg" },
+  { "id": 637, "name": "卵の君", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/637.jpg" },
+  { "id": 638, "name": "ワルノリン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/638.jpg" },
+  { "id": 639, "name": "サニーレタスさん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/639.jpg" },
+  { "id": 640, "name": "テレテル坊主", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/640.jpg" },
+  { "id": 641, "name": "モルラ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/641.jpg" },
+  { "id": 642, "name": "ミカエリ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/642.jpg" },
+  { "id": 643, "name": "一旦ソーリー", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/643.jpg" },
+  { "id": 644, "name": "ヨドム", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/644.jpg" },
+  { "id": 645, "name": "まんまミーラ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/645.jpg" },
+  { "id": 646, "name": "ダークコマー", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/646.jpg" },
+  { "id": 647, "name": "USA豆腐", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/647.jpg" },
+  { "id": 648, "name": "夜行", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/648.jpg" },
+  { "id": 649, "name": "ゴージャス大使", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/649.jpg" },
+  { "id": 650, "name": "日ノ神", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/650.jpg" },
+  { "id": 651, "name": "ぬらりひょん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/651.jpg" },
+  { "id": 652, "name": "さきのばし", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/652.jpg" },
+  { "id": 653, "name": "オタカラもどき", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/653.jpg" },
+  { "id": 654, "name": "ジャンクコシノ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/654.jpg" },
+  { "id": 655, "name": "ウィスパー孔明", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/655.jpg" },
+  { "id": 656, "name": "寿老人", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/656.jpg" },
+  { "id": 657, "name": "福禄寿", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/657.jpg" },
+  { "id": 658, "name": "マジンカーメン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/658.jpg" },
+  { "id": 659, "name": "ゴーキングデッド", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/659.jpg" },
+  { "id": 660, "name": "パンドラ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/660.jpg" },
+  { "id": 661, "name": "リアクション大王", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/661.jpg" },
+  { "id": 662, "name": "ニャステト", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/662.jpg" },
+  { "id": 663, "name": "ズラビス", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/663.jpg" },
+  { "id": 664, "name": "スピーチ姫", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/664.jpg" },
+  { "id": 665, "name": "トリベア", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/665.jpg" },
+  { "id": 666, "name": "ジェントル面犬", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/666.jpg" },
+  { "id": 667, "name": "自慢ハッタン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/667.jpg" },
+  { "id": 668, "name": "難陀竜王", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/668.jpg" },
+  { "id": 669, "name": "エンマ大王", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/669.jpg" },
+  { "id": 670, "name": "ぬらり神", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/670.jpg" },
+  { "id": 671, "name": "覚醒日ノ神", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/671.jpg" },
+  { "id": 672, "name": "先代閻魔大王", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/672.jpg" },
+  { "id": 673, "name": "覚醒エンマ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/673.jpg" },
+  { "id": 674, "name": "ノストラダマス", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/674.jpg" },
+  { "id": 675, "name": "シヴァラク", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/675.jpg" },
+  { "id": 676, "name": "銅拍子", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/676.jpg" },
+  { "id": 677, "name": "吽形", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/677.jpg" },
+  { "id": 678, "name": "阿形", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/678.jpg" },
+  { "id": 679, "name": "おんもらき", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/679.jpg" },
+  { "id": 680, "name": "ちょうちんお化け", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/680.jpg" },
+  { "id": 681, "name": "牛頭", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/681.jpg" },
+  { "id": 682, "name": "馬頭", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/682.jpg" },
+  { "id": 683, "name": "イソノナミ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/683.jpg" },
+  { "id": 684, "name": "ヤマオカミ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/684.jpg" },
+  { "id": 685, "name": "ツキノヤミ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/685.jpg" },
+  { "id": 686, "name": "ふぶきちゃん", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/686.jpg" },
+  { "id": 687, "name": "KJ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/687.jpg" },
+  { "id": 688, "name": "太陽神エンマ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/688.jpg" },
+  { "id": 689, "name": "時空神エンマ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/689.jpg" },
+  { "id": 690, "name": "暗黒神エンマ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/690.jpg" },
+  { "id": 691, "name": "インディ・J", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/691.jpg" },
+  { "id": 692, "name": "Mr.スコップ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/692.jpg" },
+  { "id": 693, "name": "ゾン・ビー・C", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/693.jpg" },
+  { "id": 694, "name": "ネコ2世", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/694.jpg" },
+  { "id": 695, "name": "クレクレパトラ", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/695.jpg" },
+  { "id": 696, "name": "ヤマトボケル", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/696.jpg" },
+  { "id": 697, "name": "エルドラゴーン", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/697.jpg" },
+  { "id": 698, "name": "日ノ鳥", "type": "normal", "image": "https://www.g-takumi.com/youkai3/images/youkai/698.jpg" }
+];
+const BOSSES = [
+  { "id": "B-001", "name": "ガラクタリアン", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10001.jpg" },
+  { "id": "B-002", "name": "スーパー店長", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10002.jpg" },
+  { "id": "B-003", "name": "モーソーもんもん", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10003.jpg" },
+  { "id": "B-004", "name": "インジャネーノ", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10004.jpg" },
+  { "id": "B-005", "name": "魔・インジャネーノ", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10005.jpg" },
+  { "id": "B-006", "name": "ヤーメルン邪先生", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10006.jpg" },
+  { "id": "B-007", "name": "デカニャン", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10007.jpg" },
+  { "id": "B-008", "name": "やぶれかぶれ院長", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10008.jpg" },
+  { "id": "B-009", "name": "妖怪獣ガメゴス", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10009.jpg" },
+  { "id": "B-010", "name": "ヨップくん", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10010.jpg" },
+  { "id": "B-011", "name": "ワルボV5", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10011.jpg" },
+  { "id": "B-012", "name": "ベッティーさん", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10012.jpg" },
+  { "id": "B-013", "name": "カミナラス五郎", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10013.jpg" },
+  { "id": "B-014", "name": "ゴゴゴGF", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10014.jpg" },
+  { "id": "B-015", "name": "空想ユメミガチーノ", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10015.jpg" },
+  { "id": "B-016", "name": "怪盗ダルマント", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10016.jpg" },
+  { "id": "B-017", "name": "あおべえあかべえ", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10017.jpg" },
+  { "id": "B-018", "name": "だるべえまーべえ", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10018.jpg" },
+  { "id": "B-019", "name": "つづらチュン太夫", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10019.jpg" },
+  { "id": "B-020", "name": "つづらチュンだるま", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10020.jpg" },
+  { "id": "B-021", "name": "異次元とーちゃん", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10021.jpg" },
+  { "id": "B-022", "name": "プリズンブレイカー", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10022.jpg" },
+  { "id": "B-023", "name": "日ノ神", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10023.jpg" },
+  { "id": "B-024", "name": "ゲボール不死長", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10024.jpg" },
+  { "id": "B-025", "name": "びしゃがつく", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10025.jpg" },
+  { "id": "B-026", "name": "赤鬼", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10026.jpg" },
+  { "id": "B-027", "name": "青鬼", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10027.jpg" },
+  { "id": "B-028", "name": "黒鬼", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10028.jpg" },
+  { "id": "B-029", "name": "ツノだるま", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10029.jpg" },
+  { "id": "B-030", "name": "坐・だるま師匠", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10030.jpg" },
+  { "id": "B-031", "name": "鬼KING", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10031.jpg" },
+  { "id": "B-032", "name": "のぼせトンマン", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10032.jpg" },
+  { "id": "B-033", "name": "おのぼり黒トン", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10033.jpg" },
+  { "id": "B-034", "name": "Gババーン", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10034.jpg" },
+  { "id": "B-035", "name": "モテアマス", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10035.jpg" },
+  { "id": "B-036", "name": "オモテナス", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10036.jpg" },
+  { "id": "B-037", "name": "イカカモネ議長", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10037.jpg" },
+  { "id": "B-038", "name": "マイティードッグ", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10038.jpg" },
+  { "id": "B-039", "name": "レッドJ", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10039.jpg" },
+  { "id": "B-040", "name": "覚醒日ノ神", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10040.jpg" },
+  { "id": "B-041", "name": "ロボニャン28号", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10041.jpg" },
+  { "id": "B-042", "name": "八つ裂鬼", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10042.jpg" },
+  { "id": "B-043", "name": "ドグシャッコー", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10043.jpg" },
+  { "id": "B-044", "name": "クロノオーメン", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10044.jpg" },
+  { "id": "B-045", "name": "ゴゴゴTドラゴン", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10045.jpg" },
+  { "id": "B-046", "name": "豪鉄鬼", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10046.jpg" },
+  { "id": "B-047", "name": "大妖鬼ホゲホエール", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10047.jpg" },
+  { "id": 48, "name": "クジラマン", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10048.jpg" },
+  { "id": "B-049", "name": "惨ゲ鬼", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10049.jpg" },
+  { "id": "B-050", "name": "キャプテンサンダー", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10050.jpg" },
+  { "id": "B-051", "name": "キャプテンサンダー", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10051.jpg" },
+  { "id": "B-052", "name": "ブシ王", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10052.jpg" },
+  { "id": "B-053", "name": "あなほりモグ蔵", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10053.jpg" },
+  { "id": "B-054", "name": "ラストブシ王", "type": "boss", "image": "https://www.g-takumi.com/youkai3/images/youkai/10054.jpg" }
+];
+
+const ALIASES = {
+  "ぶようじん坊": ["ぶようじんぼう"],
+  "がらあきん坊": ["がらあきんぼう"],
+  "さきがけの助": ["さきがけのすけ"],
+  "ダラケ刀": ["だらけとう"],
+  "ザンバラ刀": ["ざんばらとう"],
+  "ダララだんびら": ["だららだんびら"],
+  "かたづ家来": ["かたづけらい"],
+  "アライ魔将": ["あらいましょう"],
+  "獅子まる": ["ししまる"],
+  "万尾獅子": ["まんおじし"],
+  "おこ武者": ["おこむしゃ"],
+  "くしゃ武者": ["くしゃむしゃ"],
+  "なまはげ": ["なまはげ"],
+  "なまなまはげ": ["なまなまはげ"],
+  "ちからモチ": ["ちからもち"],
+  "やきモチ": ["やきもち"],
+  "一瞬ボーイ": ["いっしゅんぼーい"],
+  "寝ブタ": ["ねぶた"],
+  "ねぶた": ["ねぶた"],
+  "ひつま武士": ["ひつまぶし"],
+  "ひまつ武士": ["ひまつぶし"],
+  "ダメジャー": ["だめじゃー"],
+  "ダメジャナイン": ["だめじゃないん"],
+  "カブトさん": ["かぶとさん"],
+  "ゲンマ将軍": ["げんましょうぐん"],
+  "黄泉ゲンスイ": ["よみげんすい"],
+  "おにぎり侍": ["おにぎりざむらい"],
+  "焼きおに斬り": ["やきおにぎり"],
+  "あかなめ": ["あかなめ"],
+  "総ナメ": ["そうなめ"],
+  "ガチン小僧": ["がちんこぞう"],
+  "天下無僧": ["てんかむそう"],
+  "泥田坊": ["どろたぼう"],
+  "ニクヤ鬼": ["にくやき"],
+  "シラ切りスズメ": ["しらきりすずめ"],
+  "ベンケイ": ["べんけい"],
+  "からくりベンケイ": ["からくりべんけい"],
+  "メラメライオン": ["めらめらいおん"],
+  "グラグライオン": ["ぐらぐらいおん"],
+  "とどろき獅子": ["とどろきじし"],
+  "しょうブシ": ["しょうぶし"],
+  "まさむね": ["まさむね"],
+  "むらまさ": ["むらまさ"],
+  "くさなぎ": ["くさなぎ"],
+  "フユニャン": ["ふゆにゃん"],
+  "妖怪ガッツK": ["ようかいがっつけー"],
+  "妖怪ガッツF": ["ようかいがっつえふ"],
+  "いばる～ん": ["いばるーん"],
+  "やまと": ["やまと"],
+  "カブキ猿": ["かぶきざる"],
+  "クワノ武士": ["くわのぶし"],
+  "クワガ大将": ["くわがたいしょう"],
+  "オオクワノ神": ["おおくわのかみ"],
+  "マスクドニャーン": ["ますくどにゃーん"],
+  "モモタロニャン": ["ももたろにゃん"],
+  "ニャン騎士": ["にゃんきし"],
+  "ブリー隊長": ["ぶりーたいちょう"],
+  "ブリー元帥": ["ぶりーげんすい"],
+  "鬼食い": ["おにくい"],
+  "いのちとり": ["いのちとり"],
+  "ヒカリオロチ": ["ひかりおろち"],
+  "鬼蜘蛛": ["おにぐも"],
+  "ハンゾウ": ["はんぞう"],
+  "コタロウ": ["こたろう"],
+  "椿姫": ["つばきひめ"],
+  "さかさっ傘": ["さかさっかさ"],
+  "化け草履": ["ばけぞうり"],
+  "パッカー": ["ぱっかー"],
+  "口すべらし": ["くちすべらし"],
+  "ズルズルづる": ["ずるずるづる"],
+  "かぜカモ": ["かぜかも"],
+  "つづかな僧": ["つづかなそう"],
+  "やめたい師": ["やめたいし"],
+  "もうせん和尚": ["もうせんおしょう"],
+  "わすれん帽": ["わすれんぼう"],
+  "メゾン・ドワスレ": ["めぞんどわすれ"],
+  "ばか頭巾": ["ばかずきん"],
+  "そらミミズク": ["そらみみずく"],
+  "じごくミミズク": ["じごくみみずく"],
+  "ナンデナン": ["なんでなん"],
+  "そーナンだー": ["そーなんだー"],
+  "のっぺら坊": ["のっぺらぼう"],
+  "ハナホ人": ["はなほじん"],
+  "ひじょうぐち": ["ひじょうぐち"],
+  "まるナゲット": ["まるなげっと"],
+  "ピントコーン": ["ぴんとこーん"],
+  "カラヤブリ": ["からやぶり"],
+  "わらえ姉": ["わらえねえ"],
+  "青くちびる": ["あおくちびる"],
+  "バクロ婆": ["ばくろばあ"],
+  "ババァーン": ["ばばぁーん"],
+  "ドクロ婆": ["どくろばあ"],
+  "モテモ天": ["もてもてん"],
+  "モテマクール": ["もてまくーる"],
+  "モテヌス": ["もてぬす"],
+  "一旦ゴメン": ["いったんごめん"],
+  "あやまり倒し": ["あやまりたおし"],
+  "こえんら": ["こえんら"],
+  "えんらえんら": ["えんらえんら"],
+  "でんぱく小僧": ["でんぱくこぞう"],
+  "でんじん": ["でんじん"],
+  "おでんじん": ["おでんじん"],
+  "はつでんしん": ["はつでんしん"],
+  "U.S.O.": ["うそ"],
+  "アペリカン": ["あぺりかん"],
+  "フウ2": ["ふうつー"],
+  "スットン卿": ["すっとんきょう"],
+  "家ーイ": ["いえーい"],
+  "レインボーン": ["れいんぼーん"],
+  "ペラペライオン": ["ぺらぺらいおん"],
+  "まぼ老師": ["まぼろうし"],
+  "かげ老師": ["かげろうし"],
+  "ほう老師": ["ほうろうし"],
+  "さとりちゃん": ["さとりちゃん"],
+  "よつめ": ["よつめ"],
+  "うんがい鏡": ["うんがいきょう"],
+  "うんがい三面鏡": ["うんがいさんめんきょう"],
+  "ヤミ鏡": ["やみかがみ"],
+  "セバスチャン": ["せばすちゃん"],
+  "せいでん鬼": ["せいでんき"],
+  "なぞトキ": ["なぞとき"],
+  "紙かくし": ["かみかくし"],
+  "ヒマ神": ["ひまじん"],
+  "ミス・テリー": ["みすてりー"],
+  "ニャン魔女": ["にゃんまじょ"],
+  "オトナカイ": ["おとなかい"],
+  "天狗": ["てんぐ"],
+  "ほむら天狗": ["ほむらてんぐ"],
+  "キュウビ": ["きゅうび"],
+  "犬神": ["いぬがみ"],
+  "ぬえ": ["ぬえ"],
+  "風魔猿": ["ふうまざる"],
+  "鬼ガマ": ["おにがま"],
+  "酒呑童子": ["しゅてんどうじ"],
+  "バニー・ミント": ["ばにーみんと"],
+  "スノーラビィ": ["すのーらびぃ"],
+  "マイッカー": ["まいっかー"],
+  "だるだるま": ["だるだるま"],
+  "だるまっちょ": ["だるまっちょ"],
+  "ゴリだるま": ["ごりだるま"],
+  "うらや飯": ["うらやめし"],
+  "プライ丼": ["ぷらいどん"],
+  "迷い車": ["まよいぐるま"],
+  "だっせんしゃ": ["だっせんしゃ"],
+  "ドキ土器": ["どきどき"],
+  "怒気ドキ土器": ["どきどきどき"],
+  "ムリカベ": ["むりかべ"],
+  "むりだ城": ["むりだじょう"],
+  "シロカベ": ["しろかべ"],
+  "グレるりん": ["ぐれるりん"],
+  "ゴクドー": ["ごくどう"],
+  "アニ鬼": ["あにき"],
+  "ブルックりん": ["ぶるっくりん"],
+  "あまん汁": ["あまんじる"],
+  "ギュウ汁": ["ぎゅうじる"],
+  "ポン骨": ["ぽんこつ"],
+  "リボーン": ["りぼーん"],
+  "ヨロイさん": ["よろいさん"],
+  "モノマネキン": ["ものまねきん"],
+  "オーバーガー": ["おーばーがー"],
+  "魔ウンテン": ["まうんてん"],
+  "トオセンボン": ["とおせんぼん"],
+  "くろがねセンボン": ["くろがねせんぼん"],
+  "すもうどん": ["すもうどん"],
+  "横綱うどん": ["よこづなうどん"],
+  "あっそう山": ["あっそうさん"],
+  "あそっ火山": ["あそっかざん"],
+  "モレゾウ": ["もれぞう"],
+  "プルファント": ["ぷるふぁんと"],
+  "ガマンモス": ["がまんもす"],
+  "雷蔵": ["らいぞう"],
+  "ヒライ神": ["ひらいしん"],
+  "あっけら艦": ["あっけらかん"],
+  "シレイ艦": ["しれいかん"],
+  "あせっか鬼": ["あせっかき"],
+  "シングコング": ["しんぐこんぐ"],
+  "カメッパ": ["かめっぱ"],
+  "おくらいり": ["おくらいり"],
+  "カクさん": ["かくさん"],
+  "ふじのやま": ["ふじのやま"],
+  "さくらのじま": ["さくらのじま"],
+  "ドウカク": ["どうかく"],
+  "ギンカク": ["ぎんかく"],
+  "キンカク": ["きんかく"],
+  "プラチナカク": ["ぷらちなかく"],
+  "イヌニャン": ["いぬにゃん"],
+  "武者かぶと": ["むしゃかぶと"],
+  "かぶと無双": ["かぶとむそう"],
+  "オオツノノ神": ["おおつののかみ"],
+  "キンタロニャン": ["きんたろにゃん"],
+  "ステーキング": ["すてーきんぐ"],
+  "ロボニャン": ["ろぼにゃん"],
+  "ロボニャンF型": ["ろぼにゃんえふがた"],
+  "ロボニャンUSA": ["ろぼにゃんゆーえすえー"],
+  "ゴルニャン": ["ごるにゃん"],
+  "だいだらぼっち": ["だいだらぼっち"],
+  "うみぼうず": ["うみぼうず"],
+  "大ガマ": ["おおがま"],
+  "大やもり": ["おおやもり"],
+  "赤鬼": ["あかおに"],
+  "青鬼": ["あおおに"],
+  "黒鬼": ["くろおに"],
+  "カブキロイド": ["かぶきろいど"],
+  "ザ・シャーク": ["ざしゃーく"],
+  "エル・シャクレロ": ["えるしゃくれろ"],
+  "スカイシャリマン": ["すかいしゃりまん"],
+  "びきゃく": ["びきゃく"],
+  "ピヨピヨコ": ["ぴよぴよこ"],
+  "ほっとけーキ": ["ほっとけーき"],
+  "いきあたりバッタ": ["いきあたりばった"],
+  "しゃれこ婦人": ["しゃれこふじん"],
+  "カラカラさん": ["からからさん"],
+  "ほね美人": ["ほねびじん"],
+  "セミまる": ["せみまる"],
+  "カゲまる": ["かげまる"],
+  "ヒグラシまる": ["ひぐらしまる"],
+  "こてんパン": ["こてんぱん"],
+  "大化ケット": ["おおばけっと"],
+  "さむガリ": ["さむがり"],
+  "ガリ王子": ["がりおうじ"],
+  "あつガルル": ["あつがるる"],
+  "アンビリバ坊": ["あんびりばぼう"],
+  "バッド坊や": ["ばっどぼうや"],
+  "激辛ボーイ": ["げきからぼーい"],
+  "つらがわり": ["つらがわり"],
+  "一つ目小僧": ["ひとつめこぞう"],
+  "コンたん": ["こんたん"],
+  "わかランナー": ["わからんなー"],
+  "寝コロンブス": ["ねころんぶす"],
+  "デモネード": ["でもねーど"],
+  "バク": ["ばく"],
+  "ハク": ["はく"],
+  "おバク様": ["おばくさま"],
+  "江戸っ子パンダ": ["えどっこぱんだ"],
+  "大江戸忍者パンダ": ["おおえどにんじゃぱんだ"],
+  "カンペちゃん": ["かんぺちゃん"],
+  "無茶ぶりっ子": ["むちゃぶりっこ"],
+  "ノガッパ": ["のがっぱ"],
+  "たびガッパ": ["たびがっぱ"],
+  "なみガッパ": ["なみがっぱ"],
+  "ジバニャン": ["じばにゃん"],
+  "Bジバニャン": ["びーじばにゃん"],
+  "ジバニャンS": ["じばにゃんえす"],
+  "ジバニャン劉備": ["じばにゃんりゅうび"],
+  "アカマル": ["あかまる"],
+  "トゲニャン": ["とげにゃん"],
+  "ワルニャン": ["わるにゃん"],
+  "ブチニャン": ["ぶちにゃん"],
+  "コマさん": ["こまさん"],
+  "ししコマ": ["ししこま"],
+  "Bコマさん": ["びーこまさん"],
+  "コマさんS": ["こまさんえす"],
+  "コマさん孫策": ["こまさんそんさく"],
+  "ジバコマ": ["じばこま"],
+  "コマじろう": ["こまじろう"],
+  "とらじろう": ["とらじろう"],
+  "コマじろうS": ["こまじろうえす"],
+  "雨女": ["あめおんな"],
+  "ばくそく": ["ばくそく"],
+  "ナンスカンク": ["なんすかんく"],
+  "おきラクーン": ["おきらくーん"],
+  "おとなブル": ["おとなぶる"],
+  "たまのこし": ["たまのこし"],
+  "キュン太郎": ["きゅんたろう"],
+  "ズキュキュン太": ["ずきゅきゅんた"],
+  "裏キュン太": ["うらきゅんた"],
+  "ケマモン": ["けまもん"],
+  "ワンダーニャン": ["わんだーにゃん"],
+  "ジェットニャン": ["じぇっとにゃん"],
+  "サルニャン": ["さるにゃん"],
+  "トムニャン": ["とむにゃん"],
+  "KKブラザーズ": ["けーけーぶらざーず"],
+  "ゆきおんな": ["ゆきおんな"],
+  "ふぶき姫": ["ふぶきひめ"],
+  "百鬼姫": ["ひゃっきひめ"],
+  "メロンニャン": ["めろんにゃん"],
+  "ミカンニャン": ["みかんにゃん"],
+  "キウイニャン": ["きういにゃん"],
+  "ブドウニャン": ["ぶどうにゃん"],
+  "イチゴニャン": ["いちごにゃん"],
+  "スイカニャン": ["すいかにゃん"],
+  "サファイニャン": ["さふぁいにゃん"],
+  "エメラルニャン": ["えめらるにゃん"],
+  "ルビーニャン": ["るびーにゃん"],
+  "トパニャン": ["とぱにゃん"],
+  "ダイヤニャン": ["だいやにゃん"],
+  "ロボガッパ": ["ろぼがっぱ"],
+  "ロボコマ": ["ろぼこま"],
+  "セーラーニャン": ["せーらーにゃん"],
+  "レッドJ": ["れっどじぇい"],
+  "マイティードッグ": ["まいてぃーどっぐ"],
+  "かまいたち": ["かまいたち"],
+  "チョコボニャン": ["ちょこぼにゃん"],
+  "モーグリニャン": ["もーぐりにゃん"],
+  "ぷにニャン": ["ぷににゃん"],
+  "ぷにコマ": ["ぷにこま"],
+  "スシジバ": ["すしじば"],
+  "天コマ": ["てんこま"],
+  "河童": ["かっぱ"],
+  "水虎": ["すいこ"],
+  "マスターニャーダ": ["ますたーにゃーだ"],
+  "烏天狗": ["からすてんぐ"],
+  "カルラ": ["かるら"],
+  "から傘お化け": ["からかさおばけ"],
+  "モ作": ["もさく"],
+  "ハーモリー": ["はーもりー"],
+  "うらやましろう": ["うらやましろう"],
+  "つまみぐいのすけ": ["つまみぐいのすけ"],
+  "ワカメくん": ["わかめくん"],
+  "ワカメ☆スター": ["わかめすたー"],
+  "コンブさん": ["こんぶさん"],
+  "メカブちゃん": ["めかぶちゃん"],
+  "モズク先生": ["もずくせんせい"],
+  "ひも爺": ["ひもじい"],
+  "くいい爺": ["くいいじい"],
+  "こめ爺": ["こめじい"],
+  "ハングリーG": ["はんぐりーじー"],
+  "キズナメコ": ["きずなめこ"],
+  "キズナース": ["きずなーす"],
+  "砂夫": ["すなお"],
+  "大山砂夫": ["おおやますなお"],
+  "風呂ずきん": ["ふろずきん"],
+  "ふろーラル": ["ふろーらる"],
+  "アフロ13": ["あふろじゅうさーてぃーん"],
+  "テンテコ米": ["てんてこまい"],
+  "あしたガール": ["あしたがーる"],
+  "どっちつかず": ["どっちつかず"],
+  "ポチッ": ["ぽちっ"],
+  "ウキウキビ": ["うきうきび"],
+  "トキメキビ": ["ときめきび"],
+  "びんボーイ": ["びんぼーい"],
+  "お金ナイダー": ["おかねないだー"],
+  "らくてん童": ["らくてんどう"],
+  "ざしきわらし": ["ざしきわらし"],
+  "ざしきわら神": ["ざしきわらしん"],
+  "ぜっこう蝶": ["ぜっこうちょう"],
+  "ゼッコウ蝶": ["ぜっこうちょう"],
+  "サイコウ蝶": ["さいこうちょう"],
+  "アゲアゲハ": ["あげあげは"],
+  "くだん": ["くだん"],
+  "大くだん": ["だいくだん"],
+  "どんちゃん": ["どんちゃん"],
+  "晴れ男": ["はれおとこ"],
+  "サンタク老師": ["さんたくろうし"],
+  "ふくろじじい": ["ふくろじじい"],
+  "カンガエルー": ["かんがえるー"],
+  "はなしカミ": ["はなしかみ"],
+  "サンデーパパ": ["さんでーぱぱ"],
+  "ガッテンマイヤー": ["がってんまいやー"],
+  "エコロ爺": ["えころじい"],
+  "イーセンイッテル": ["いーせんいってる"],
+  "カントリーバァバ": ["かんとりーばぁば"],
+  "ホノボーノ": ["ほのぼーの"],
+  "ヒョウヘンヌ": ["ひょうへんぬ"],
+  "ヒョウヘンナ": ["ひょうへんな"],
+  "キジニャン": ["きじにゃん"],
+  "ハッピィさん": ["はっぴぃさん"],
+  "歯磨貴婦人": ["はみがききふじん"],
+  "ロボG": ["ろぼじー"],
+  "さいの目入道": ["さいのめにゅうどう"],
+  "ゾロ目大明神": ["ぞろめだいみょうじん"],
+  "から傘魔人": ["からかさまじん"],
+  "ウラシマニャン": ["うらしまにゃん"],
+  "いたれりつくせり": ["いたれりつくせり"],
+  "雷オトン": ["らいおとん"],
+  "絶オジイ": ["ぜつおじい"],
+  "聖オカン": ["せいおかん"],
+  "心オバア": ["しんおばあ"],
+  "麒麟": ["きりん"],
+  "イッカク": ["いっかく"],
+  "スピーディーW": ["すぴーでぃーだぶる"],
+  "カンフーマッハ": ["かんふーまっは"],
+  "やるせナス": ["やるせなす"],
+  "チクリ魔": ["ちくりま"],
+  "ちらかし家来": ["ちらかしけらい"],
+  "みちび鬼": ["みちびき"],
+  "えこひい鬼": ["えこひいき"],
+  "かたのり小僧": ["かたのりこぞう"],
+  "かたのり親方": ["かたのりおやかた"],
+  "ぎっくり男": ["ぎっくりおとこ"],
+  "草くいおとこ": ["くさくいおとこ"],
+  "肉くいおとこ": ["にくくいおとこ"],
+  "TETSUYA": ["てつや"],
+  "KANTETSU": ["かんてつ"],
+  "つぶや木": ["つぶやき"],
+  "ツリート": ["つりーと"],
+  "ネガティブーン": ["ねがてぃぶーん"],
+  "ジャネガブーン": ["じゃねがぶーん"],
+  "かゆかゆ": ["かゆかゆ"],
+  "ジミー": ["じみー"],
+  "カゲロー": ["かげろー"],
+  "カイム": ["かいむ"],
+  "カリカリベーコン": ["かりかりべーこん"],
+  "ぎしんあん鬼": ["ぎしんあんき"],
+  "ガ鬼": ["がき"],
+  "あまのじゃく": ["あまのじゃく"],
+  "ジンギスギスカン": ["じんぎすぎすかん"],
+  "チンギスギスハン": ["ちんぎすぎすはん"],
+  "ヒキコウモリ": ["ひきこうもり"],
+  "トジコウモリ": ["とじこうもり"],
+  "ヤドコウモリ": ["やどこうもり"],
+  "かりパックン": ["かりぱっくん"],
+  "泥ボックン": ["どろぼっくん"],
+  "ギーくん": ["ぎーくん"],
+  "ハッキング": ["はっきんぐ"],
+  "ひとまか仙人": ["ひとまかせんにん"],
+  "りもこんかくし": ["りもこんかくし"],
+  "ジコチュウ": ["じこちゅう"],
+  "じこけん王": ["じこけんおう"],
+  "インチキン": ["いんちきん"],
+  "あんのジョー": ["あんのじょー"],
+  "アイタタタイムズ": ["あいたたたいむず"],
+  "ゴジダツ爺": ["ごじだつじい"],
+  "ネクラマテング": ["ねくらまてんぐ"],
+  "ヨミテング": ["よみてんぐ"],
+  "まてんし": ["まてんし"],
+  "リー夫人": ["りーふじん"],
+  "ガブニャン": ["がぶにゃん"],
+  "カッパー": ["かっぱー"],
+  "ダリス": ["だりす"],
+  "USAピョン": ["うさぴょん"],
+  "USAピョン(アメフト)": ["うさぴょんあめふと"],
+  "USAピョン(マリン)": ["うさぴょんまりん"],
+  "USAピョン(ミリタリー)": ["うさぴょんみりたりー"],
+  "USAピョン(ドライビング)": ["うさぴょんどらいびんぐ"],
+  "B-USAピョン": ["びーうさぴょん"],
+  "USAピョン仲達": ["うさぴょんちゅうたつ"],
+  "ミツマタノヅチ": ["みつまたのづち"],
+  "魔ガサス": ["まがさす"],
+  "ウ魔": ["うま"],
+  "ガシャどくろ": ["がしゃどくろ"],
+  "デビビル": ["でびびる"],
+  "デビビラン": ["でびびらん"],
+  "虫歯伯爵": ["むしばはくしゃく"], 
+  "百々目鬼": ["とどめき"],
+  "きらめ鬼": ["きらめき"],
+  "ドケチング": ["どけちんぐ"],
+  "ヤミまろ": ["やみまろ"],
+  "どんどろ": ["どんどろ"],
+  "ヤミキュウビ": ["やみきゅうび"],
+  "ゼロ博士": ["ぜろはかせ"],
+  "Dr.カゲムラ": ["どくたーかげむら"],
+  "魔天王": ["まてんおう"],
+  "かえりタイ": ["かえりたい"],
+  "やぶレター": ["やぶれたー"],
+  "てのひらがえし": ["てのひらがえし"],
+  "あしでまとい": ["あしでまとい"],
+  "イガイガグリ": ["いがいがぐり"],
+  "チクチクウニ": ["ちくちくうに"],
+  "じめりんぼう": ["じめりんぼう"],
+  "雨ふらし": ["あめふらし"],
+  "こおりんぼう": ["こおりんぼう"],
+  "化けあられ": ["ばけあられ"],
+  "たらりん": ["たらりん"],
+  "ヨコドリ": ["よこだり"],
+  "ぶんぶん鳥": ["ぶんぶんどり"],
+  "はらおドリ": ["はらおどり"],
+  "おともらし": ["おともらし"],
+  "爆音ならし": ["ばくおんならし"],
+  "トホホギス": ["とほほぎす"],
+  "ブカッコウ": ["ぶかっこう"],
+  "死神鳥": ["しにがみどり"],
+  "じんめん犬": ["じんめんけん"],
+  "かおベロス": ["かおべろす"],
+  "三途の犬": ["さんずのいぬ"],
+  "けうけげん": ["けうけげん"],
+  "ふさふさん": ["ふさふさん"],
+  "たいこモチ": ["たいこもち"],
+  "ごまスリー": ["ごますりー"],
+  "認MEN": ["みとめん"],
+  "黄ばんドール": ["きばんどーる"],
+  "ふあんかん": ["ふあんかん"],
+  "たらいまわし": ["たらいまわし"],
+  "口だけおんな": ["くちだけおんな"],
+  "おつぼね様": ["おつぼねさま"],
+  "ドンヨリーヌ": ["どんよりーぬ"],
+  "シメッポイーナ": ["しめっぽいーな"],
+  "砂ン丘入道": ["さんきゅうにゅうどう"],
+  "ノー砂ン丘入道": ["のーさんきゅうにゅうどう"],
+  "じがじぃさん": ["じがじぃさん"],
+  "のらりくらり": ["のらりくらり"],
+  "おすべり様": ["おすべりさま"],
+  "おしっしょう": ["おしっしょう"],
+  "おひとり様": ["おひとりさま"],
+  "テンパるンバ": ["てんぱるんば"],
+  "こしパンダ": ["こしぱんだ"],
+  "おならず者": ["おならずもの"],
+  "へこ鬼神": ["へこきじん"],
+  "花子さん": ["はなこさん"],
+  "呪野花子": ["のろいのはなこ"],
+  "ロボメン犬": ["ろぼめんけん"],
+  "けちらし": ["けちらし"],
+  "アンラッキィさん": ["あんらっきぃさん"],
+  "ヨッチャ～": ["よっちゃー"],
+  "しわくちゃん": ["しわくちゃん"],
+  "老いらん": ["おいらん"],
+  "ふじみ御前": ["ふじみごぜん"],
+  "のぼせトンマン": ["のぼせとんまん"],
+  "ダークニャン": ["だーくにゃん"],
+  "決めて魔王": ["きめてまおう"],
+  "おとろし": ["おとろし"],
+  "フゥミン": ["ふぅみん"],
+  "おねむの精": ["おねむのせい"],
+  "土蜘蛛": ["つちぐも"],
+  "女郎蜘蛛": ["じょろうぐも"],
+  "オリジン": ["おりじん"],
+  "ファントム": ["ふぁんとむ"],
+  "サキちゃん": ["さきちゃん"],
+  "ねちがえる": ["ねちがえる"],
+  "バンジーきゅうす": ["ばんじーきゅうす"],
+  "マイマイペース": ["まいまいぺーす"],
+  "ダソックス": ["だそっくす"],
+  "アーダコンダ": ["あーだこんだ"],
+  "ツチノコ": ["つちのこ"],
+  "フクリュウ": ["ふくりゅう"],
+  "ツチノコパンダ": ["つちのこぱんだ"],
+  "ツチノコ星人": ["つちのこせいじん"],
+  "からみぞん": ["からみぞん"],
+  "こんがらギャル": ["こんがらぎゃる"],
+  "オッタマゲーター": ["おったまげーたー"],
+  "ナンモナイト": ["なんもないと"],
+  "カイーギョ": ["かいーぎょ"],
+  "笑ウツボ": ["わらうつぼ"],
+  "歌ウナギ": ["うたうなぎ"],
+  "大蛇のツボ": ["だいじゃのつぼ"],
+  "たこやっ鬼": ["たこやっき"],
+  "たこや鬼神": ["たこやきじん"],
+  "キライギョ": ["きらいぎょ"],
+  "ゾウオ": ["ぞうお"],
+  "ギャクジョウオ": ["ぎゃくじょうお"],
+  "おもいだスッポン": ["おもいだすっぽん"],
+  "おもいだ神": ["おもいだしん"],
+  "ムカムカデ": ["むかむかで"],
+  "激ドラゴン": ["げきどらごん"],
+  "りゅーくん": ["りゅーくん"],
+  "龍神": ["りゅうじん"],
+  "青龍": ["せいりゅう"],
+  "にんぎょ": ["にんぎょ"],
+  "八百比丘尼": ["やおびくに"],
+  "イザナミ": ["いざなみ"],
+  "ダイナシー": ["だいなしー"],
+  "D-レックス": ["でぃーれっくす"],
+  "ドジラ": ["どじら"],
+  "ろくろ首": ["ろくろくび"],
+  "ウィスパー": ["うぃすぱー"],
+  "ウィスベェ": ["うぃすべぇ"],
+  "キリスギリス": ["きりすぎりす"],
+  "ひっぱりダコ": ["ひっぱりだこ"],
+  "たこうらみ": ["たこうらみ"],
+  "ボー坊": ["ぼーぼう"],
+  "しどろもどろ": ["しどろもどろ"],
+  "ミチクサメ": ["みちくさめ"],
+  "トーシロザメ": ["とーしろざめ"],
+  "ムダヅカイ": ["むだづかい"],
+  "はらわシェル": ["はらわしぇる"],
+  "ナガバナ": ["ながばな"],
+  "ナガバナナ": ["ながばなな"],
+  "チョコバナーナ": ["ちょこばなーな"],
+  "ホリュウ": ["ほりゅう"],
+  "ロボノコ": ["ろぼのこ"],
+  "ロボりゅーくん": ["ろぼりゅーくん"],
+  "油すまし": ["あぶらすまし"],
+  "しきるん蛇": ["しきるんじゃ"],
+  "すねスネーク": ["すねすねーく"],
+  "まむし行司": ["まむしぎょうじ"],
+  "つられたろう丸": ["つられたろうまる"],
+  "おれリュウ": ["おれりゅう"],
+  "オロチ": ["おろち"],
+  "影オロチ": ["かげおろち"],
+  "センポクカンポク": ["せんぽくかんぽく"],
+  "マッサラニャン": ["まっさらにつゃん"],
+  "アンドロイド山田": ["あんどろいどやまだ"],
+  "厄怪": ["やっかい"],
+  "不怪": ["ふかい"],
+  "豪怪": ["ごうかい"],
+  "難怪": ["なんかい"],
+  "破怪": ["はかい"],
+  "あかなめ・怪": ["あかなめかい"],
+  "泥田坊・怪": ["どろたぼうかい"],
+  "えんらえんら・怪": ["えんらえんらかい"],
+  "河童・怪": ["かっぱかい"],
+  "から傘お化け・怪": ["からかさおばけかい"],
+  "ざしきわらし・怪": ["ざしきわらしかい"],
+  "くだん・怪": ["くだんかい"],
+  "けうけげん・怪": ["けうけげんかい"],
+  "にんぎょ・怪": ["にんぎょかい"],
+  "ろくろ首・怪": ["ろくろくびかい"],
+  "ジバニャンK": ["じばにゃんきんぐ"],
+  "USAピョンQ": ["うさぴょんくいーん"],
+  "コマさんJ": ["こまさんじゃっく"],
+  "コマじゅうろう": ["こまじゅうろう"],
+  "フユニャンエース": ["ふゆにゃんえーす"],
+  "ウィスババ": ["うぃすばば"],
+  "弁財天": ["べんざいてん"],
+  "布袋尊": ["ほていそん"],
+  "大黒天": ["だいこくてん"],
+  "恵比寿": ["えびす"],
+  "毘沙門天": ["びしゃもんてん"],
+  "コロンブス": ["ころんぶす"],
+  "エジソン": ["えじそん"],
+  "ダーウィン": ["だーうぃん"],
+  "ラストブシニャン": ["らすとぶしにゃん"],
+  "キラコマ": ["きらこま"],
+  "プラチナ鬼": ["ぷらちなおに"],
+  "ブルジョワG": ["ぶるじょわじー"],
+  "ブシニャン": ["ぶしにゃん"],
+  "しゅらコマ": ["しゅらこま"],
+  "山吹鬼": ["やまぶきおに"],
+  "ネタバレリーナ": ["ねたばれりーな"],
+  "花さか爺": ["はなさかじい"],
+  "うんちく魔": ["うんちくま"],
+  "イケメン犬": ["いけめんいぬ"],
+  "やまタン": ["やまたん"],
+  "ばたんQ": ["ばたんきゅー"],
+  "乙姫": ["おとひめ"],
+  "あしゅら": ["あしゅら"],
+  "ニャーミネーター": ["にゃーみねーたー"],
+  "ヒーローニャン": ["ひーろーにゃん"],
+  "フユニャンS": ["ふゆにゃんえす"],
+  "フユニャン曹操": ["ふゆにゃんそうそう"],
+  "ひとりよがり": ["ひとりよがり"],
+  "ウォール・ガイ": ["うぉーるがい"],
+  "ガランドゥ": ["がらんどぅ"],
+  "バケルトン": ["ばけるとん"],
+  "メカオロチ": ["めかおろち"],
+  "黒鬼呂布": ["くろおにりょふ"],
+  "メカキュウビ": ["めかきゅうび"],
+  "Uロボニャン": ["あるてぃめっとろぼにゃん"],
+  "デバミ": ["でばみ"],
+  "しらんプリン": ["しらんぷりん"],
+  "ミーフー": ["みーふー"],
+  "コアラニャン": ["こあらにゃん"],
+  "Tジバニャン": ["とれじゃーじばにゃん"],
+  "Tコマさん": ["とれじゃーこまさん"],
+  "卵の君": ["たまごのきみ"],
+  "ワルノリン": ["わるのりん"],
+  "サニーレタスさん": ["さにーれたすさん"],
+  "テレテル坊主": ["てれてるぼうず"],
+  "モルラ": ["もるら"],
+  "ミカエリ": ["みかえり"],
+  "一旦ソーリー": ["いったんそーりー"],
+  "ヨドム": ["よどむ"],
+  "まんまミーラ": ["まんまみーら"],
+  "ダークコマー": ["だーくこまー"],
+  "USA豆腐": ["うさどうふ"],
+  "夜行": ["やぎょう"],
+  "ゴージャス大使": ["ごーじゃすたいし"],
+  "日ノ神": ["ひのしん"],
+  "ぬらりひょん": ["ぬらりひょん"],
+  "さきのばし": ["さきのばし"],
+  "オタカラもどき": ["おたからもどき"],
+  "ジャンクコシノ": ["じゃんくこしの"],
+  "ウィスパー孔明": ["うぃすぱーこうめい"],
+  "寿老人": ["じゅろうじん"],
+  "福禄寿": ["ふくろくじゅ"],
+  "マジンカーメン": ["まじんかーめん"],
+  "ゴーキングデッド": ["ごーきんぐでっど"],
+  "パンドラ": ["ぱんどら"],
+  "リアクション大王": ["りあくしょんだいおう"],
+  "ニャステト": ["にゃすてと"],
+  "ズラビス": ["ずらびす"],
+  "スピーチ姫": ["すぴーちひめ"],
+  "トリベア": ["とりべあ"],
+  "ジェントル面犬": ["じぇんとるめんけん"],
+  "自慢ハッタン": ["じまんはったん"],
+  "難陀竜王": ["なんだりゅうおう"],
+  "エンマ大王": ["えんまだいおう"],
+  "ぬらり神": ["ぬらりしん"],
+  "覚醒日ノ神": ["かくせいひのしん"],
+  "先代閻魔大王": ["せんだいえんまだいおう"],
+  "覚醒エンマ": ["かくせいえんま"],
+  "ノストラダマス": ["のすとらだます"],
+  "シヴァラク": ["しばらく"],
+  "銅拍子": ["どうびょうし"],
+  "吽形": ["うんぎょう"],
+  "阿形": ["あぎょう"],
+  "おんもらき": ["おんもらき"],
+  "ちょうちんお化け": ["ちょうちんおばけ"],
+  "牛頭": ["ごず"],
+  "馬頭": ["めず"],
+  "イソノナミ": ["いそのなみ"],
+  "ヤマオカミ": ["やまおかみ"],
+  "ツキノヤミ": ["つきのやみ"],
+  "ふぶきちゃん": ["ふぶきちゃん"],
+  "KJ": ["けーじぇー"],
+  "太陽神エンマ": ["たいようしんえんま"],
+  "時空神エンマ": ["じくうしんえんま"],
+  "暗黒神エンマ": ["あんこくしんえんま"],
+  "インディ・J": ["いんでぃじょーず"],
+  "Mr.スコップ": ["みすたーすこっぷ"],
+  "ゾン・ビー・C": ["ぞんびーちょっぱー"],
+  "ネコ2世": ["ねこにせい"],
+  "クレクレパトラ": ["くれくれぱとら"],
+  "ヤマトボケル": ["やまとぼける"],
+  "エルドラゴーン": ["えるどらごーん"],
+  "日ノ鳥": ["ひのとり"],
+  // Bosses
+  "ガラクタリアン": ["がらくたりあん"],
+  "スーパー店長": ["すーぱーてんちょう"],
+  "モーソーもんもん": ["もーそーもんもん"],
+  "インジャネーノ": ["いんじゃねーの"],
+  "魔・インジャネーノ": ["まいんじゃねーの"],
+  "ヤーメルン邪先生": ["やーめるんじゃせんせい"],
+  "デカニャン": ["でかにゃん"],
+  "やぶれかぶれ院長": ["やぶれかぶれいんちょう"],
+  "妖怪獣ガメゴス": ["ようかいじゅうがめごす"],
+  "ヨップくん": ["よっぷくん"],
+  "ワルボV5": ["わるぼゔいふぁいぶ"],
+  "ベッティーさん": ["べってぃーさん"],
+  "カミナラス五郎": ["かみならすごろう"],
+  "ゴゴゴGF": ["ごごごごっどふぁーざー"],
+  "空想ユメミガチーノ": ["くうそうゆめみがちーの"],
+  "怪盗ダルマント": ["かいとうだるまんと"],
+  "あおべえあかべえ": ["あおべえあかべえ"],
+  "だるべえまーべえ": ["だるべえまーべえ"],
+  "つづらチュン太夫": ["つづらちゅんだゆう"],
+  "つづらチュンだるま": ["つづらちゅんだるま"],
+  "異次元とーちゃん": ["いじげんとーちゃん"],
+  "プリズンブレイカー": ["ぷりずんぶれいかー"],
+  "日ノ神": ["ひのしん"],
+  "ゲボール不死長": ["げぼーるふしちょう"],
+  "びしゃがつく": ["びしゃがつく"],
+  "赤鬼": ["あかおに"],
+  "青鬼": ["あおおに"],
+  "黒鬼": ["くろおに"],
+  "ツノだるま": ["つのだるま"],
+  "坐・だるま師匠": ["ざだるまししょう"],
+  "鬼KING": ["おにきんぐ"],
+  "のぼせトンマン": ["のぼせとんまん"],
+  "おのぼり黒トン": ["おのぼりくろとん"],
+  "Gババーン": ["じーばばーん"],
+  "モテアマス": ["もてあます"],
+  "オモテナス": ["おもてなす"],
+  "イカカモネ議長": ["いかかもねぎちょう"],
+  "マイティードッグ": ["まいてぃーどっぐ"],
+  "レッドJ": ["れっどじぇい"],
+  "覚醒日ノ神": ["かくせいひのかみ"],
+  "ロボニャン28号": ["ろぼにゃんにじゅうはちごう"],
+  "八つ裂鬼": ["やつざき"],
+  "ドグシャッコー": ["どぐしゃっこう"],
+  "クロノオーメン": ["くろのおーめん"],
+  "ゴゴゴTドラゴン": ["ごごごとれじゃーどらごん"],
+  "豪鉄鬼": ["ごうてっき"],
+  "大妖鬼ホゲホエール": ["だようきほげほえーる"],
+  "クジラマン": ["くじらまん"],
+  "惨ゲ鬼": ["さんげき"],
+  "キャプテンサンダー": ["きゃぷてんさんだー"],
+  "ブシ王": ["ぶしおう"],
+  "あなほりモグ蔵": ["あなほりもぐぞう"],
+  "ラストブシ王": ["らすとぶしおう"]
+};
+</script>
+<script>
+let mode = "normal";
+let items = [];
+let solved = { normal: new Set(), boss: new Set() };
+let elapsed = { normal: 0, boss: 0 };
+let started = { normal: false, boss: false };
+let paused = { normal: true, boss: true };
+let finished = { normal: false, boss: false };
+let listShown = { normal: false, boss: false };
+let tick = null;
+let audioCtx = null;
+
+const $ = s => document.querySelector(s);
+const norm = s => s.normalize("NFKC")
+  .replace(/[\s ・･()（）「」『』【】［］]/g, "")
+  .replace(/[ァ-ン]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x60))
+  .toLowerCase();
+
+const fmt = t => [Math.floor(t / 3600), Math.floor(t / 60) % 60, t % 60]
+  .map(v => String(v).padStart(2, "0")).join(":");
+
+function build() {
+  items = [...YO_KAI];
+  if (mode !== "normal") items.push(...BOSSES);
+}
+
+function loadState() {
+  try {
+    ['normal', 'boss'].forEach(m => {
+      const savedSolved = localStorage.getItem(`yokai3_${m}_solved`);
+      if (savedSolved) {
+        solved[m] = new Set(JSON.parse(savedSolved));
+      }
+      const savedTime = localStorage.getItem(`yokai3_${m}_elapsed`);
+      if (savedTime !== null) {
+        elapsed[m] = parseInt(savedTime, 10) || 0;
+      }
+      const savedStarted = localStorage.getItem(`yokai3_${m}_started`);
+      if (savedStarted !== null) {
+        started[m] = savedStarted === 'true';
+      }
+      const savedFinished = localStorage.getItem(`yokai3_${m}_finished`);
+      if (savedFinished !== null) {
+        finished[m] = savedFinished === 'true';
+      }
+      if (started[m] && !finished[m]) {
+        paused[m] = true;
+      }
+    });
+  } catch (e) {}
+}
+
+function saveState() {
+  try {
+    ['normal', 'boss'].forEach(m => {
+      localStorage.setItem(`yokai3_${m}_solved`, JSON.stringify([...solved[m]]));
+      localStorage.setItem(`yokai3_${m}_elapsed`, elapsed[m]);
+      localStorage.setItem(`yokai3_${m}_started`, started[m]);
+      localStorage.setItem(`yokai3_${m}_finished`, finished[m]);
+    });
+  } catch (e) {}
+}
+
+function countSolved() {
+  return items.reduce((n, x) => n + (solved[mode].has(x.id) ? 1 : 0), 0);
+}
+
+function updateStats() {
+  const n = countSolved();
+  $("#correct").textContent = n;
+  $("#remaining").textContent = items.length - n;
+  $("#solvedCount").textContent = n;
+  $("#unsolvedCount").textContent = items.length - n;
+  $("#total").textContent = items.length;
+}
+
+function imageFor(x) {
+  if (!x.image) return "";
+  return `<img loading="lazy" src="${x.image}" alt="${x.name}" onerror="this.style.display='none';this.parentElement.classList.add('img-failed')">`;
+}
+
+function render() {
+  const g = $("#grid"); g.innerHTML = ""; g.classList.toggle("list-mode", listShown[mode]);
+  let last = "";
+  items.forEach(x => {
+    if (x.type !== last) {
+      const h = document.createElement("div"); h.className = "section-title"; h.textContent = x.type === "normal" ? "通常妖怪" : "ボス妖怪";
+      g.appendChild(h); last = x.type;
+    }
+    const ok = solved[mode].has(x.id), reveal = ok || listShown[mode];
+    const c = document.createElement("div"); c.className = "card" + (ok ? " solved" : " unsolved");
+    // ▼ ここでカードにIDを持たせることでスクロール先を正確に特定できるように修正 ▼
+    c.dataset.id = x.id;
+    const no = x.type === "normal" ? String(x.id).padStart(3, "0") : x.id;
+    c.innerHTML = `<span class="num">${no}</span><div class="portrait">${reveal ? imageFor(x) : "?"}</div>${ok ? '<span class="check">✓</span>' : ""}<div class="name">${reveal ? x.name : ""}</div>`;
+    g.appendChild(c);
+  });
+}
+
+function msg(t, good = true) {
+  $("#message").textContent = t;
+  $("#message").style.color = good ? "#1f765b" : "#b53b3b";
+}
+
+function startTimer() {
+  if (tick) clearInterval(tick);
+  tick = setInterval(() => {
+    if (started[mode] && !paused[mode] && !finished[mode]) {
+      elapsed[mode]++;
+      $("#timer").textContent = fmt(elapsed[mode]);
+      saveState();
+    }
+  }, 1000);
+}
+
+function updateControlsUI() {
+  const isStarted = started[mode];
+  const isPaused = paused[mode];
+  const isFinished = finished[mode];
+  const isListShown = listShown[mode];
+
+  $("#answer").disabled = !isStarted || isPaused || isFinished;
+  $("#pause").disabled = !isStarted || isFinished;
+  $("#giveup").disabled = !isStarted;
+  $("#start").disabled = isStarted && !isFinished;
+
+  if (isFinished) {
+    $("#start").textContent = "ゲーム終了";
+    $("#pause").textContent = "一時停止";
+    $("#giveup").textContent = isListShown ? "やり直す" : "降参";
+  } else if (!isStarted) {
+    $("#start").textContent = "ゲーム開始";
+    $("#pause").textContent = "一時停止";
+    $("#giveup").textContent = "降参";
+  } else {
+    $("#start").textContent = "ゲーム中";
+    $("#pause").textContent = isPaused ? "再開" : "一時停止";
+    $("#giveup").textContent = "降参";
+  }
+}
+
+function syncUI() {
+  $("#timer").textContent = fmt(elapsed[mode]);
+  updateStats();
+  render();
+  updateControlsUI();
+
+  if (finished[mode]) {
+    if (listShown[mode]) {
+      msg(`答え合わせ：正解 ${countSolved()}体 ／ 未回答 ${items.length - countSolved()}体`, true);
+    } else {
+      showResult();
+    }
+  } else if (!started[mode]) {
+    msg("「ゲーム開始」ボタンを押すとスタートします。", true);
+  } else if (paused[mode]) {
+    msg("一時停止中です。「再開」ボタンを押すと続きから遊べます。", true);
+  } else {
+    msg("ゲーム中です。思い出せる妖怪の名前を入力してください。", true);
+  }
+}
+
+function startGame() {
+  if (started[mode] && !paused[mode]) return;
+  started[mode] = true;
+  paused[mode] = false;
+  finished[mode] = false;
+  listShown[mode] = false;
+  saveState();
+  syncUI();
+  if (!tick) startTimer();
+  $("#answer").focus();
+}
+
+function playCorrectSound() {
+  if (!$("#sound").checked) return;
+  try {
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    const now = audioCtx.currentTime, osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(880, now);
+    osc.frequency.setValueAtTime(1174.66, now + 0.08);
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.18, now + 0.015);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.22);
+    osc.connect(gain).connect(audioCtx.destination);
+    osc.start(now);
+    osc.stop(now + 0.23);
+  } catch (e) {}
+}
+
+function finishGame() {
+  if (finished[mode]) return;
+  finished[mode] = true;
+  paused[mode] = true;
+  saveState();
+  syncUI();
+  showResult();
+}
+
+function showResult() {
+  $("#resultTime").textContent = fmt(elapsed[mode]);
+  $("#resultScore").textContent = `${countSolved()}体 / ${items.length}体`;
+  $("#resultMessage").textContent = countSolved() === items.length ? "全問正解！" : "ゲーム終了！";
+  const dlg = $("#result");
+  if (!dlg.open) dlg.showModal();
+}
+
+function showList() {
+  listShown[mode] = true;
+  $("#result").close();
+  saveState();
+  syncUI();
+}
+
+function resetGame() {
+  solved[mode].clear();
+  elapsed[mode] = 0;
+  started[mode] = false;
+  paused[mode] = true;
+  finished[mode] = false;
+  listShown[mode] = false;
+  localStorage.removeItem(`yokai3_${mode}_solved`);
+  localStorage.removeItem(`yokai3_${mode}_elapsed`);
+  localStorage.removeItem(`yokai3_${mode}_started`);
+  localStorage.removeItem(`yokai3_${mode}_finished`);
+  syncUI();
+  $("#timer").textContent = "00:00:00";
+  $("#answer").value = "";
+  msg("「ゲーム開始」を押すとスタートします。", true);
+}
+
+function retryGame() {
+  resetGame();
+  startGame();
+}
+
+function setMode(m) {
+  if (mode === m) return;
+  if (started[mode] && !finished[mode]) {
+    paused[mode] = true;
+    saveState();
+  }
+  mode = m;
+  build();
+  if (started[mode] && !finished[mode]) {
+    paused[mode] = true;
+    saveState();
+  }
+  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.mode === mode));
+  syncUI();
+  if (started[mode] && !finished[mode] && items.every(x => solved[mode].has(x.id))) {
+    finishGame();
+  }
+}
+
+function submit() {
+  const v = $("#answer").value.trim();
+  if (!v || paused[mode] || !started[mode] || finished[mode]) return;
+  const answerNorm = norm(v);
+  
+  const hits = items.filter(x => {
+    if (solved[mode].has(x.id)) return false;
+    if (norm(x.name) === answerNorm) return true;
+    const aliases = ALIASES[x.name] || [];
+    return aliases.some(a => norm(a) === answerNorm);
+  });
+
+  if (hits.length > 0) {
+    hits.forEach(hit => solved[mode].add(hit.id));
+    $("#answer").value = "";
+    playCorrectSound();
+    
+    // ▼ 複数開いた場合のメッセージ変更 ▼
+    if (hits.length > 1) {
+      msg(`${hits[0].name}正解！ ${hits.length}つ開きました！`, true);
+    } else {
+      msg(`${hits[0].name}、正解！`, true);
+    }
+
+    render();
+    updateStats();
+    saveState();
+    
+    // ▼ 今回正解した最初の要素（ボスではなく通常妖怪）へスクロールするように修正 ▼
+    if ($("#autoscroll").checked) {
+      const targetCard = document.querySelector(`.card[data-id="${hits[0].id}"]`);
+      if (targetCard) targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    
+    if (items.every(x => solved[mode].has(x.id))) finishGame();
+  } else {
+    msg("その名前は見つかりませんでした。表記や難易度を確認してください。", false);
+  }
+}
+
+function handleVisibilityPause() {
+  if (started[mode] && !paused[mode] && !finished[mode]) {
+    paused[mode] = true;
+    saveState();
+    syncUI();
+  }
+}
+
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    handleVisibilityPause();
+  }
+});
+
+window.addEventListener("blur", () => {
+  handleVisibilityPause();
+});
+
+$("#start").onclick = () => {
+  if (finished[mode]) {
+    retryGame();
+  } else {
+    startGame();
+  }
+};
+$("#submit").onclick = submit;
+$("#answer").addEventListener("keydown", e => { if (e.key === "Enter") submit(); });
+
+$("#pause").onclick = () => {
+  if (!started[mode] || finished[mode]) return;
+  paused[mode] = !paused[mode];
+  saveState();
+  syncUI();
+  if (!paused[mode]) $("#answer").focus();
+};
+
+$("#giveup").onclick = () => {
+  if (finished[mode] && listShown[mode]) {
+    resetGame();
+    return;
+  }
+  if (!started[mode] || finished[mode]) return;
+  $("#confirmGiveup").showModal();
+};
+
+$("#cancelGiveup").onclick = () => $("#confirmGiveup").close();
+$("#confirmGiveupOk").onclick = () => {
+  $("#confirmGiveup").close();
+  if (started[mode] && !finished[mode]) finishGame();
+};
+
+$("#showResultList").onclick = showList;
+$("#resultRetry").onclick = () => {
+  $("#result").close();
+  retryGame();
+};
+
+document.querySelectorAll(".tab").forEach(t => t.onclick = () => setMode(t.dataset.mode));
+$("#helpBtn").onclick = () => $("#help").showModal();
+$("#closeHelp").onclick = () => $("#help").close();
+
+$("#normalCount").textContent = YO_KAI.length;
+$("#bossCount").textContent = YO_KAI.length + BOSSES.length;
+
+loadState();
+build();
+syncUI();
+startTimer();
+</script>
+</body>
+</html>
