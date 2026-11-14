@@ -1777,7 +1777,7 @@ function updateStats() {
 function imageFor(x) {
   if (!x.image) return "";
   const fileName = x.image.split("/").pop();
-  return `<img loading="lazy" src="images/${fileName}" alt="${x.name}" onerror="this.style.display='none';this.parentElement.classList.add('img-failed')">`;
+  return `<img loading="lazy" src="${fileName}" alt="${x.name}" onerror="this.style.display='none';this.parentElement.classList.add('img-failed')">`;
 }
 
 let currentFilter = "all"; // 現在のフィルター状態を保存
