@@ -2608,8 +2608,21 @@ $("#jumpWanted").onclick = () => {
 
 // ツイートボタンの処理を追加
 $("#tweetResult").onclick = () => {
-  const text = `妖怪ウォッチ3の妖怪を ${countSolved()}体 答えられました！\n#妖怪ウォッチ3 #全妖怪言えるかな\n`;
-  const url = window.location.href; // 現在のページのURLを自動取得
+  const solvedCount = countSolved();
+  const totalCount = items.length;
+  const timeStr = fmt(elapsed[mode]);
+  const modeNames = {
+    normal: "基本",
+    boss: "ボスあり",
+    wanted: "ボス＆ウォンテッドあり"
+  };
+
+  const statusLine = solvedCount === totalCount
+    ? `${solvedCount}/${totalCount}体 全妖怪コンプリート！`
+    : `${solvedCount}/${totalCount}体の妖怪を思い出せた！`;
+
+  const text = `「妖怪ウォッチ3 全妖怪言えるかな？」に挑戦！\n${statusLine}\n難易度：${modeNames[mode]}｜タイム：${timeStr}\n#妖怪ウォッチ3 #全妖怪言えるかな\n`;
+  const url = window.location.href;
   window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, "_blank");
 };
 
