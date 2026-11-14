@@ -134,10 +134,11 @@ footer {
   <div class="brand"><span>妖怪ウォッチ3</span><strong>全妖怪言えるかな？</strong></div>
   <button id="helpBtn" class="help">遊び方</button>
 </header>
-<nav class="tabs">
-  <button data-mode="normal" class="tab active">基本 <b id="normalCount"></b>体</button>
-  <button data-mode="boss" class="tab">ボスあり <b id="bossCount"></b>体</button>
-</nav>
+<div class="tabs">
+  <button id="modeNormal" class="tab active" data-mode="normal">基本 698体</button>
+  <button id="modeBoss" class="tab" data-mode="boss">ボスあり 752体</button>
+  <button id="modeWanted" class="tab" data-mode="wanted">ボス＆ウォンテッドあり 836体</button>
+</div>
 <section class="controls control-panel">
   <div class="timer" id="timer">00:00:00</div>
   <div class="score">正解 <b id="correct">0</b>/<span id="total">698</span>体 残り <b id="remaining">698</b>体</div>
@@ -150,8 +151,9 @@ footer {
 <div id="message" class="message">「ゲーム開始」ボタンを押すとゲームが始まります。</div>
 <section class="filters">
   <div class="filter-left" style="display:flex; gap:10px;">
-    <a href="javascript:void(0)" id="jumpNormal" style="color:#356257; font-weight:bold; text-decoration:none; cursor:pointer;">通常妖怪</a>
-    <a href="javascript:void(0)" id="jumpBoss" style="color:#356257; font-weight:bold; text-decoration:none; cursor:pointer;">ボス妖怪</a>
+        <a href="javascript:void(0)" id="jumpNormal" style="color:#356257; font-weight:bold; text-decoration:none; cursor:pointer;">通常妖怪</a>
+        <a href="javascript:void(0)" id="jumpBoss" style="color:#356257; font-weight:bold; text-decoration:none; cursor:pointer;">ボス妖怪</a>
+        <a href="javascript:void(0)" id="jumpWanted" style="color:#356257; font-weight:bold; text-decoration:none; cursor:pointer;">ウォンテッド</a>
   </div>
   <div class="filter-right" style="margin-left:auto; display:flex; gap:13px; align-items:center;">
     <button id="btnFilterAll" class="mini active">すべて</button>
@@ -1709,13 +1711,13 @@ const ALIASES = {
 <script>
 let mode = "normal";
 let items = [];
-let solved = { normal: new Set(), boss: new Set() };
-let elapsed = { normal: 0, boss: 0 };
-let started = { normal: false, boss: false };
-let paused = { normal: true, boss: true };
-let finished = { normal: false, boss: false };
-let listShown = { normal: false, boss: false };
-let tick = null;
+// 例：以下のようにそれぞれのオブジェクトに wanted を追加する
+let solved = { normal: new Set(), boss: new Set(), wanted: new Set() };
+let started = { normal: false, boss: false, wanted: false };
+let paused = { normal: false, boss: false, wanted: false };
+let finished = { normal: false, boss: false, wanted: false };
+let listShown = { normal: false, boss: false, wanted: false };
+let elapsed = { normal: 0, boss: 0, wanted: 0 };let tick = null;
 let audioCtx = null;
 
 const $ = s => document.querySelector(s);
@@ -1729,12 +1731,13 @@ const fmt = t => [Math.floor(t / 3600), Math.floor(t / 60) % 60, t % 60]
 
 function build() {
   items = [...YO_KAI];
-  if (mode !== "normal") items.push(...BOSSES);
+  if (mode === "boss" || mode === "wanted") items.push(...BOSSES);
+  if (mode === "wanted") items.push(...WANTED_YOKAI);
 }
 
 function loadState() {
   try {
-    ['normal', 'boss'].forEach(m => {
+    ['normal', 'boss', 'wanted'].forEach(m => {
       const savedSolved = localStorage.getItem(`yokai3_${m}_solved`);
       if (savedSolved) {
         solved[m] = new Set(JSON.parse(savedSolved));
@@ -1760,7 +1763,7 @@ function loadState() {
 
 function saveState() {
   try {
-    ['normal', 'boss'].forEach(m => {
+    ['normal', 'boss', 'wanted'].forEach(m => {
       localStorage.setItem(`yokai3_${m}_solved`, JSON.stringify([...solved[m]]));
       localStorage.setItem(`yokai3_${m}_elapsed`, elapsed[m]);
       localStorage.setItem(`yokai3_${m}_started`, started[m]);
@@ -1791,7 +1794,8 @@ function imageFor(x) {
 let currentFilter = "all"; // 現在のフィルター状態を保存
 
 function render() {
-  $("#jumpBoss").style.display = mode === "boss" ? "inline" : "none";
+  $("#jumpBoss").style.display = (mode === "boss" || mode === "wanted") ? "inline" : "none";
+  $("#jumpWanted").style.display = mode === "wanted" ? "inline" : "none";
   const g = $("#grid"); g.innerHTML = ""; g.classList.toggle("list-mode", listShown[mode]);
   let last = "";
   items.forEach(x => {
@@ -1803,12 +1807,12 @@ function render() {
     if (currentFilter === "unsolved" && ok) show = false;
 
     if (show) {
-      // 見出し（通常妖怪/ボス妖怪）の表示処理
+      // 見出し（通常妖怪/ボス妖怪/ウォンテッド妖怪）の表示処理
       if (x.type !== last) {
         const h = document.createElement("div"); 
         h.className = "section-title"; 
-        h.id = "sec-" + x.type; // ←★ここを追加（ジャンプ先の目印）
-        h.textContent = x.type === "normal" ? "通常妖怪" : "ボス妖怪";
+        h.id = "sec-" + x.type;
+        h.textContent = x.type === "normal" ? "通常妖怪" : x.type === "boss" ? "ボス妖怪" : "ウォンテッド妖怪";
         g.appendChild(h); 
         last = x.type;
       }
@@ -2108,6 +2112,10 @@ $("#jumpBoss").onclick = () => {
   const target = document.getElementById("sec-boss");
   if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
 };
+$("#jumpWanted").onclick = () => {
+  const target = document.getElementById("sec-wanted");
+  if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+};
 
 // ツイートボタンの処理を追加
 $("#tweetResult").onclick = () => {
@@ -2120,8 +2128,6 @@ document.querySelectorAll(".tab").forEach(t => t.onclick = () => setMode(t.datas
 $("#helpBtn").onclick = () => $("#help").showModal();
 $("#closeHelp").onclick = () => $("#help").close();
 
-$("#normalCount").textContent = YO_KAI.length;
-$("#bossCount").textContent = YO_KAI.length + BOSSES.length;
 
 loadState();
 build();
