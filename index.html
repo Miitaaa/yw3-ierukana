@@ -1791,6 +1791,7 @@ function imageFor(x) {
 let currentFilter = "all"; // 現在のフィルター状態を保存
 
 function render() {
+  $("#jumpBoss").style.display = mode === "boss" ? "inline" : "none";
   const g = $("#grid"); g.innerHTML = ""; g.classList.toggle("list-mode", listShown[mode]);
   let last = "";
   items.forEach(x => {
