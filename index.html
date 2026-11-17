@@ -2433,15 +2433,18 @@ function finishGame() {
   paused[mode] = true;
   saveState();
   syncUI();
-  showResult();
 }
 
 function showResult() {
   $("#resultTime").textContent = fmt(elapsed[mode]);
   $("#resultScore").textContent = `${countSolved()}体 / ${items.length}体`;
-  $("#resultMessage").textContent = countSolved() === items.length ? "全問正解！" : "ゲーム終了！";
+  $("#resultMessage").textContent = countSolved() === items.length ? "全妖怪コンプリート！" : "ゲーム終了！";
   const dlg = $("#result");
-  if (!dlg.open) dlg.showModal();
+  // キーボードを閉じてから確実にモーダルを開く
+  if (document.activeElement) document.activeElement.blur();
+  setTimeout(() => {
+    if (!dlg.open) dlg.showModal();
+  }, 150);
 }
 
 function showList() {
@@ -2496,7 +2499,7 @@ function submit() {
   const v = $("#answer").value.trim();
   if (!v || paused[mode] || !started[mode] || finished[mode]) return;
   const answerNorm = norm(v);
-  
+
   let matchedItem = null;
   let isAlreadySolved = false;
 
@@ -2517,7 +2520,18 @@ function submit() {
     hits.forEach(hit => solved[mode].add(hit.id));
     $("#answer").value = "";
     playCorrectSound();
-    
+
+    const isComplete = items.every(x => solved[mode].has(x.id));
+
+    if (isComplete) {
+      msg("全妖怪コンプリート！おめでとうございます！", "success");
+      render();
+      updateStats();
+      saveState();
+      finishGame();
+      return;
+    }
+
     if (hits.length > 1) {
       msg(`${hits[0].name}正解！ ${hits.length}つ開きました！`, "success");
     } else {
@@ -2527,13 +2541,11 @@ function submit() {
     render();
     updateStats();
     saveState();
-    
+
     if ($("#autoscroll").checked) {
       const targetCard = document.querySelector(`.card[data-id="${hits[0].id}"]`);
       if (targetCard) targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
     }
-    
-    if (items.every(x => solved[mode].has(x.id))) finishGame();
   } else if (isAlreadySolved && matchedItem) {
     $("#answer").value = "";
     msg(`${matchedItem.name} は解答済みです`, "duplicate");
